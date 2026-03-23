@@ -1,0 +1,72 @@
+model Campaign {
+  id           String           @id @default(cuid())
+  slug         String           @unique  
+  title        String
+  description  String
+  longBody     String?          
+  category     CampaignCategory
+  status       CampaignStatus   @default(DRAFT)
+
+  goalAmount   Float
+  raisedAmount Float            @default(0)
+  donorCount   Int              @default(0)
+
+  coverImage   String?
+  images       String[]         
+
+  isUrgent     Boolean          @default(false)
+  isFeatured   Boolean          @default(false)
+
+  startDate    DateTime?
+  endDate      DateTime?
+
+  donations    Donation[]
+  updates      CampaignUpdate[]
+  tags         CampaignTag[]
+
+  isDeleted    Boolean         @default(false)
+  deletedAt    DateTime?
+
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  @@index([category])
+  @@index([status])
+  @@index([isUrgent])
+  @@index([isFeatured])
+  @@index([deletedAt])
+  @@index([endDate])
+  @@map("campaigns")
+}
+
+model CampaignUpdate {
+  id         String   @id @default(cuid())
+  campaignId String
+  title      String
+  body       String
+  campaign   Campaign @relation(fields: [campaignId], references: [id])
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([campaignId])
+  @@map("campaign_updates")
+}
+
+model Tag {
+  id        String        @id @default(cuid())
+  name      String        @unique
+  campaigns CampaignTag[]
+
+  @@map("tags")
+}
+
+model CampaignTag {
+  campaignId String
+  tagId      String
+  campaign   Campaign @relation(fields: [campaignId], references: [id])
+  tag        Tag      @relation(fields: [tagId], references: [id])
+
+  @@id([campaignId, tagId])
+  @@map("campaign_tags")
+}

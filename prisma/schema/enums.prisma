@@ -1,0 +1,93 @@
+enum Role {
+  SUPER_ADMIN   
+  ADMIN         
+  MODERATOR     
+  MEMBER        
+  VOLUNTEER     
+  DONOR        
+}
+
+enum AdminRole {
+  SUPER_ADMIN
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  BLOCKED
+  DELETED
+}
+
+enum CampaignCategory {
+  MEDICAL
+  MOSQUE
+  HOUSING
+  EDUCATION
+  FOOD
+  DISASTER_RELIEF
+  GENERAL
+}
+
+enum CampaignStatus {
+  DRAFT       
+  ACTIVE      
+  PAUSED      
+  COMPLETED   
+  CANCELLED   
+}
+
+enum PaymentMethod {
+  BKASH
+  NAGAD
+  ROCKET
+  BANK_TRANSFER
+  CASH
+  CARD
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+  CANCELLED
+}
+
+enum DonationType {
+  CAMPAIGN      
+  GENERAL       
+  ZAKAT         
+  SADAQAH       
+  RECURRING     
+}
+
+
+enum MemberGroup {
+  FOUNDER
+  ADVISOR
+  COMMITTEE
+  VOLUNTEER
+  HONORARY
+}
+
+enum MemberStatus {
+  ACTIVE
+  INACTIVE
+  ON_LEAVE
+}
+
+enum EventStatus {
+  UPCOMING
+  ONGOING
+  COMPLETED
+  CANCELLED
+}
+
+enum EventType {
+  SPORTS_TOURNAMENT
+  RELIGIOUS_GATHERING
+  COMMUNITY_FAIR
+  FUNDRAISER
+  TRAINING
+  OTHER
+}

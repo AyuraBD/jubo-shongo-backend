@@ -1,0 +1,350 @@
+model Admin {
+  id        String    @id @default(uuid())
+  name      String
+  email     String    @unique
+  role      AdminRole @default(ADMIN)
+  isDeleted Boolean   @default(false)
+  deletedAt DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("admin")
+}
+
+model User {
+  id                 String       @id
+  name               String
+  email              String
+  emailVerified      Boolean      @default(false)
+  role               Role         @default(VOLUNTEER)
+  status             UserStatus   @default(ACTIVE)
+  needPasswordChange Boolean      @default(false)
+  isDeleted          Boolean      @default(false)
+  deletedAt          DateTime?
+  image              String?
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+  sessions           Session[]
+  accounts           Account[]
+  teammembers        TeamMember[]
+  admins             Admin?
+  donations          Donation[]
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
+
+model Campaign {
+  id          String           @id @default(cuid())
+  slug        String           @unique
+  title       String
+  description String
+  longBody    String?
+  category    CampaignCategory
+  status      CampaignStatus   @default(DRAFT)
+
+  goalAmount   Float
+  raisedAmount Float @default(0)
+  donorCount   Int   @default(0)
+
+  coverImage String?
+  images     String[]
+
+  isUrgent   Boolean @default(false)
+  isFeatured Boolean @default(false)
+
+  startDate DateTime?
+  endDate   DateTime?
+
+  donations Donation[]
+  updates   CampaignUpdate[]
+  tags      CampaignTag[]
+
+  isDeleted Boolean   @default(false)
+  deletedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([category])
+  @@index([status])
+  @@index([isUrgent])
+  @@index([isFeatured])
+  @@index([deletedAt])
+  @@index([endDate])
+  @@map("campaigns")
+}
+
+model CampaignUpdate {
+  id         String   @id @default(cuid())
+  campaignId String
+  title      String
+  body       String
+  campaign   Campaign @relation(fields: [campaignId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([campaignId])
+  @@map("campaign_updates")
+}
+
+model Tag {
+  id        String        @id @default(cuid())
+  name      String        @unique
+  campaigns CampaignTag[]
+
+  @@map("tags")
+}
+
+model CampaignTag {
+  campaignId String
+  tagId      String
+  campaign   Campaign @relation(fields: [campaignId], references: [id])
+  tag        Tag      @relation(fields: [tagId], references: [id])
+
+  @@id([campaignId, tagId])
+  @@map("campaign_tags")
+}
+
+model Donation {
+  id     String        @id @default(cuid())
+  amount Float
+  type   DonationType  @default(CAMPAIGN)
+  method PaymentMethod
+  status PaymentStatus @default(PENDING)
+
+  paymentGatewayData Json?
+
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
+
+  donorName   String?
+  donorEmail  String?
+  donorPhone  String?
+  isAnonymous Boolean @default(false)
+
+  campaignId String?
+  campaign   Campaign? @relation(fields: [campaignId], references: [id])
+
+  message String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([campaignId])
+  @@index([status])
+  @@index([method])
+  @@index([type])
+  @@index([createdAt])
+  @@map("donations")
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  MODERATOR
+  MEMBER
+  VOLUNTEER
+  DONOR
+}
+
+enum AdminRole {
+  SUPER_ADMIN
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  BLOCKED
+  DELETED
+}
+
+enum CampaignCategory {
+  MEDICAL
+  MOSQUE
+  HOUSING
+  EDUCATION
+  FOOD
+  DISASTER_RELIEF
+  GENERAL
+}
+
+enum CampaignStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  BKASH
+  NAGAD
+  ROCKET
+  BANK_TRANSFER
+  CASH
+  CARD
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+  CANCELLED
+}
+
+enum DonationType {
+  CAMPAIGN
+  GENERAL
+  ZAKAT
+  SADAQAH
+  RECURRING
+}
+
+enum MemberGroup {
+  FOUNDER
+  ADVISOR
+  COMMITTEE
+  VOLUNTEER
+  HONORARY
+}
+
+enum MemberStatus {
+  ACTIVE
+  INACTIVE
+  ON_LEAVE
+}
+
+enum EventStatus {
+  UPCOMING
+  ONGOING
+  COMPLETED
+  CANCELLED
+}
+
+enum EventType {
+  SPORTS_TOURNAMENT
+  RELIGIOUS_GATHERING
+  COMMUNITY_FAIR
+  FUNDRAISER
+  TRAINING
+  OTHER
+}
+
+model Event {
+  id           String      @id @default(cuid())
+  slug         String      @unique
+  title        String
+  description  String?
+  type         EventType
+  status       EventStatus @default(UPCOMING)
+  coverImage   String?
+  location     String?
+  startDate    DateTime
+  endDate      DateTime?
+  maxAttendees Int?
+
+  isDeleted Boolean   @default(false)
+  deletedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([type])
+  @@index([status])
+  @@index([startDate])
+  @@map("events")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../src/generated/prisma" // ← matches your folder
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model TeamMember {
+  id     String  @id @default(cuid())
+  userId String? @unique
+  user   User?   @relation(fields: [userId], references: [id])
+
+  name     String
+  role     String
+  group    MemberGroup
+  status   MemberStatus @default(ACTIVE)
+  bio      String?
+  photo    String?
+  location String?
+  joinYear Int
+  skills   String[]
+
+  socials Json?
+
+  sortOrder Int @default(0)
+
+  deletedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([group])
+  @@index([status])
+  @@index([deletedAt])
+  @@map("team_members")
+}

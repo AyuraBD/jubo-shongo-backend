@@ -1,0 +1,33 @@
+model Donation {
+  id           String        @id @default(cuid())
+  amount       Float
+  type         DonationType  @default(CAMPAIGN)
+  method       PaymentMethod
+  status       PaymentStatus @default(PENDING)
+
+  paymentGatewayData  Json?
+
+  userId       String?
+  user         User?         @relation(fields: [userId], references: [id])
+
+  donorName    String?
+  donorEmail   String?
+  donorPhone   String?
+  isAnonymous  Boolean       @default(false)
+
+  campaignId   String?
+  campaign     Campaign?     @relation(fields: [campaignId], references: [id])
+
+  message      String?
+
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([userId])
+  @@index([campaignId])
+  @@index([status])
+  @@index([method])
+  @@index([type])
+  @@index([createdAt])
+  @@map("donations")
+}
