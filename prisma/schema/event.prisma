@@ -1,12 +1,12 @@
 model Event {
-  id          String      @id @default(cuid())
-  slug        String      @unique
+  id          String      @id @default(uuid())
   title       String
   description String?
   type        EventType
   status      EventStatus @default(UPCOMING)
   coverImage  String?
   location    String?
+  
   startDate   DateTime
   endDate     DateTime?
   maxAttendees Int?

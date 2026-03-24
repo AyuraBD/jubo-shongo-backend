@@ -1,6 +1,5 @@
 model Campaign {
-  id           String           @id @default(cuid())
-  slug         String           @unique  
+  id           String           @id @default(uuid())
   title        String
   description  String
   longBody     String?          
@@ -12,7 +11,6 @@ model Campaign {
   donorCount   Int              @default(0)
 
   coverImage   String?
-  images       String[]         
 
   isUrgent     Boolean          @default(false)
   isFeatured   Boolean          @default(false)
@@ -21,9 +19,7 @@ model Campaign {
   endDate      DateTime?
 
   donations    Donation[]
-  updates      CampaignUpdate[]
-  tags         CampaignTag[]
-
+  
   isDeleted    Boolean         @default(false)
   deletedAt    DateTime?
 
@@ -37,36 +33,4 @@ model Campaign {
   @@index([deletedAt])
   @@index([endDate])
   @@map("campaigns")
-}
-
-model CampaignUpdate {
-  id         String   @id @default(cuid())
-  campaignId String
-  title      String
-  body       String
-  campaign   Campaign @relation(fields: [campaignId], references: [id])
-
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  @@index([campaignId])
-  @@map("campaign_updates")
-}
-
-model Tag {
-  id        String        @id @default(cuid())
-  name      String        @unique
-  campaigns CampaignTag[]
-
-  @@map("tags")
-}
-
-model CampaignTag {
-  campaignId String
-  tagId      String
-  campaign   Campaign @relation(fields: [campaignId], references: [id])
-  tag        Tag      @relation(fields: [tagId], references: [id])
-
-  @@id([campaignId, tagId])
-  @@map("campaign_tags")
 }

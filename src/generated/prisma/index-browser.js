@@ -185,7 +185,6 @@ exports.Prisma.VerificationScalarFieldEnum = {
 
 exports.Prisma.CampaignScalarFieldEnum = {
   id: 'id',
-  slug: 'slug',
   title: 'title',
   description: 'description',
   longBody: 'longBody',
@@ -195,7 +194,6 @@ exports.Prisma.CampaignScalarFieldEnum = {
   raisedAmount: 'raisedAmount',
   donorCount: 'donorCount',
   coverImage: 'coverImage',
-  images: 'images',
   isUrgent: 'isUrgent',
   isFeatured: 'isFeatured',
   startDate: 'startDate',
@@ -204,25 +202,6 @@ exports.Prisma.CampaignScalarFieldEnum = {
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
-};
-
-exports.Prisma.CampaignUpdateScalarFieldEnum = {
-  id: 'id',
-  campaignId: 'campaignId',
-  title: 'title',
-  body: 'body',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.TagScalarFieldEnum = {
-  id: 'id',
-  name: 'name'
-};
-
-exports.Prisma.CampaignTagScalarFieldEnum = {
-  campaignId: 'campaignId',
-  tagId: 'tagId'
 };
 
 exports.Prisma.DonationScalarFieldEnum = {
@@ -245,7 +224,6 @@ exports.Prisma.DonationScalarFieldEnum = {
 
 exports.Prisma.EventScalarFieldEnum = {
   id: 'id',
-  slug: 'slug',
   title: 'title',
   description: 'description',
   type: 'type',
@@ -256,25 +234,6 @@ exports.Prisma.EventScalarFieldEnum = {
   endDate: 'endDate',
   maxAttendees: 'maxAttendees',
   isDeleted: 'isDeleted',
-  deletedAt: 'deletedAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.TeamMemberScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  name: 'name',
-  role: 'role',
-  group: 'group',
-  status: 'status',
-  bio: 'bio',
-  photo: 'photo',
-  location: 'location',
-  joinYear: 'joinYear',
-  skills: 'skills',
-  socials: 'socials',
-  sortOrder: 'sortOrder',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -384,20 +343,6 @@ exports.EventStatus = exports.$Enums.EventStatus = {
   CANCELLED: 'CANCELLED'
 };
 
-exports.MemberGroup = exports.$Enums.MemberGroup = {
-  FOUNDER: 'FOUNDER',
-  ADVISOR: 'ADVISOR',
-  COMMITTEE: 'COMMITTEE',
-  VOLUNTEER: 'VOLUNTEER',
-  HONORARY: 'HONORARY'
-};
-
-exports.MemberStatus = exports.$Enums.MemberStatus = {
-  ACTIVE: 'ACTIVE',
-  INACTIVE: 'INACTIVE',
-  ON_LEAVE: 'ON_LEAVE'
-};
-
 exports.Prisma.ModelName = {
   Admin: 'Admin',
   User: 'User',
@@ -405,12 +350,8 @@ exports.Prisma.ModelName = {
   Account: 'Account',
   Verification: 'Verification',
   Campaign: 'Campaign',
-  CampaignUpdate: 'CampaignUpdate',
-  Tag: 'Tag',
-  CampaignTag: 'CampaignTag',
   Donation: 'Donation',
-  Event: 'Event',
-  TeamMember: 'TeamMember'
+  Event: 'Event'
 };
 
 /**

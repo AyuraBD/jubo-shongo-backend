@@ -9,27 +9,26 @@ model Admin {
   updatedAt DateTime  @updatedAt
 
   userId String @unique
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("admin")
 }
 
 model User {
-  id                 String       @id
+  id                 String     @id @default(uuid())
   name               String
   email              String
-  emailVerified      Boolean      @default(false)
-  role               Role         @default(VOLUNTEER)
-  status             UserStatus   @default(ACTIVE)
-  needPasswordChange Boolean      @default(false)
-  isDeleted          Boolean      @default(false)
+  emailVerified      Boolean    @default(false)
+  role               Role       @default(DONOR)
+  status             UserStatus @default(ACTIVE)
+  needPasswordChange Boolean    @default(false)
+  isDeleted          Boolean    @default(false)
   deletedAt          DateTime?
   image              String?
-  createdAt          DateTime     @default(now())
-  updatedAt          DateTime     @updatedAt
+  createdAt          DateTime   @default(now())
+  updatedAt          DateTime   @updatedAt
   sessions           Session[]
   accounts           Account[]
-  teammembers        TeamMember[]
   admins             Admin?
   donations          Donation[]
 
@@ -86,8 +85,7 @@ model Verification {
 }
 
 model Campaign {
-  id          String           @id @default(cuid())
-  slug        String           @unique
+  id          String           @id @default(uuid())
   title       String
   description String
   longBody    String?
@@ -99,7 +97,6 @@ model Campaign {
   donorCount   Int   @default(0)
 
   coverImage String?
-  images     String[]
 
   isUrgent   Boolean @default(false)
   isFeatured Boolean @default(false)
@@ -108,8 +105,6 @@ model Campaign {
   endDate   DateTime?
 
   donations Donation[]
-  updates   CampaignUpdate[]
-  tags      CampaignTag[]
 
   isDeleted Boolean   @default(false)
   deletedAt DateTime?
@@ -126,40 +121,8 @@ model Campaign {
   @@map("campaigns")
 }
 
-model CampaignUpdate {
-  id         String   @id @default(cuid())
-  campaignId String
-  title      String
-  body       String
-  campaign   Campaign @relation(fields: [campaignId], references: [id])
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([campaignId])
-  @@map("campaign_updates")
-}
-
-model Tag {
-  id        String        @id @default(cuid())
-  name      String        @unique
-  campaigns CampaignTag[]
-
-  @@map("tags")
-}
-
-model CampaignTag {
-  campaignId String
-  tagId      String
-  campaign   Campaign @relation(fields: [campaignId], references: [id])
-  tag        Tag      @relation(fields: [tagId], references: [id])
-
-  @@id([campaignId, tagId])
-  @@map("campaign_tags")
-}
-
 model Donation {
-  id     String        @id @default(cuid())
+  id     String        @id @default(uuid())
   amount Float
   type   DonationType  @default(CAMPAIGN)
   method PaymentMethod
@@ -255,20 +218,6 @@ enum DonationType {
   RECURRING
 }
 
-enum MemberGroup {
-  FOUNDER
-  ADVISOR
-  COMMITTEE
-  VOLUNTEER
-  HONORARY
-}
-
-enum MemberStatus {
-  ACTIVE
-  INACTIVE
-  ON_LEAVE
-}
-
 enum EventStatus {
   UPCOMING
   ONGOING
@@ -286,14 +235,14 @@ enum EventType {
 }
 
 model Event {
-  id           String      @id @default(cuid())
-  slug         String      @unique
-  title        String
-  description  String?
-  type         EventType
-  status       EventStatus @default(UPCOMING)
-  coverImage   String?
-  location     String?
+  id          String      @id @default(uuid())
+  title       String
+  description String?
+  type        EventType
+  status      EventStatus @default(UPCOMING)
+  coverImage  String?
+  location    String?
+
   startDate    DateTime
   endDate      DateTime?
   maxAttendees Int?
@@ -317,34 +266,4 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-}
-
-model TeamMember {
-  id     String  @id @default(cuid())
-  userId String? @unique
-  user   User?   @relation(fields: [userId], references: [id])
-
-  name     String
-  role     String
-  group    MemberGroup
-  status   MemberStatus @default(ACTIVE)
-  bio      String?
-  photo    String?
-  location String?
-  joinYear Int
-  skills   String[]
-
-  socials Json?
-
-  sortOrder Int @default(0)
-
-  deletedAt DateTime?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([group])
-  @@index([status])
-  @@index([deletedAt])
-  @@map("team_members")
 }

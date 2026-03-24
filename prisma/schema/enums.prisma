@@ -61,21 +61,6 @@ enum DonationType {
   RECURRING     
 }
 
-
-enum MemberGroup {
-  FOUNDER
-  ADVISOR
-  COMMITTEE
-  VOLUNTEER
-  HONORARY
-}
-
-enum MemberStatus {
-  ACTIVE
-  INACTIVE
-  ON_LEAVE
-}
-
 enum EventStatus {
   UPCOMING
   ONGOING
