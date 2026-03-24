@@ -15,6 +15,7 @@ model User {
   accounts      Account[]
   admins        Admin?
   donations     Donation[]
+  donors        Donor[]
 
   @@unique([email])
   @@map("user")

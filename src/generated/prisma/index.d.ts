@@ -49,6 +49,11 @@ export type Campaign = $Result.DefaultSelection<Prisma.$CampaignPayload>
  */
 export type Donation = $Result.DefaultSelection<Prisma.$DonationPayload>
 /**
+ * Model Donor
+ * 
+ */
+export type Donor = $Result.DefaultSelection<Prisma.$DonorPayload>
+/**
  * Model Event
  * 
  */
@@ -398,6 +403,16 @@ export class PrismaClient<
     * ```
     */
   get donation(): Prisma.DonationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.donor`: Exposes CRUD operations for the **Donor** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Donors
+    * const donors = await prisma.donor.findMany()
+    * ```
+    */
+  get donor(): Prisma.DonorDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.event`: Exposes CRUD operations for the **Event** model.
@@ -849,6 +864,7 @@ export namespace Prisma {
     Verification: 'Verification',
     Campaign: 'Campaign',
     Donation: 'Donation',
+    Donor: 'Donor',
     Event: 'Event'
   };
 
@@ -865,7 +881,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "admin" | "user" | "session" | "account" | "verification" | "campaign" | "donation" | "event"
+      modelProps: "admin" | "user" | "session" | "account" | "verification" | "campaign" | "donation" | "donor" | "event"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1387,6 +1403,80 @@ export namespace Prisma {
           }
         }
       }
+      Donor: {
+        payload: Prisma.$DonorPayload<ExtArgs>
+        fields: Prisma.DonorFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DonorFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DonorPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DonorFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DonorPayload>
+          }
+          findFirst: {
+            args: Prisma.DonorFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DonorPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DonorFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DonorPayload>
+          }
+          findMany: {
+            args: Prisma.DonorFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DonorPayload>[]
+          }
+          create: {
+            args: Prisma.DonorCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DonorPayload>
+          }
+          createMany: {
+            args: Prisma.DonorCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DonorCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DonorPayload>[]
+          }
+          delete: {
+            args: Prisma.DonorDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DonorPayload>
+          }
+          update: {
+            args: Prisma.DonorUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DonorPayload>
+          }
+          deleteMany: {
+            args: Prisma.DonorDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DonorUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DonorUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DonorPayload>[]
+          }
+          upsert: {
+            args: Prisma.DonorUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DonorPayload>
+          }
+          aggregate: {
+            args: Prisma.DonorAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDonor>
+          }
+          groupBy: {
+            args: Prisma.DonorGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DonorGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DonorCountArgs<ExtArgs>
+            result: $Utils.Optional<DonorCountAggregateOutputType> | number
+          }
+        }
+      }
       Event: {
         payload: Prisma.$EventPayload<ExtArgs>
         fields: Prisma.EventFieldRefs
@@ -1576,6 +1666,7 @@ export namespace Prisma {
     verification?: VerificationOmit
     campaign?: CampaignOmit
     donation?: DonationOmit
+    donor?: DonorOmit
     event?: EventOmit
   }
 
@@ -1660,12 +1751,14 @@ export namespace Prisma {
     sessions: number
     accounts: number
     donations: number
+    donors: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     donations?: boolean | UserCountOutputTypeCountDonationsArgs
+    donors?: boolean | UserCountOutputTypeCountDonorsArgs
   }
 
   // Custom InputTypes
@@ -1698,6 +1791,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountDonationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DonationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountDonorsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DonorWhereInput
   }
 
 
@@ -3075,6 +3175,7 @@ export namespace Prisma {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     admins?: boolean | User$adminsArgs<ExtArgs>
     donations?: boolean | User$donationsArgs<ExtArgs>
+    donors?: boolean | User$donorsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3129,6 +3230,7 @@ export namespace Prisma {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     admins?: boolean | User$adminsArgs<ExtArgs>
     donations?: boolean | User$donationsArgs<ExtArgs>
+    donors?: boolean | User$donorsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3141,6 +3243,7 @@ export namespace Prisma {
       accounts: Prisma.$AccountPayload<ExtArgs>[]
       admins: Prisma.$AdminPayload<ExtArgs> | null
       donations: Prisma.$DonationPayload<ExtArgs>[]
+      donors: Prisma.$DonorPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3553,6 +3656,7 @@ export namespace Prisma {
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     admins<T extends User$adminsArgs<ExtArgs> = {}>(args?: Subset<T, User$adminsArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     donations<T extends User$donationsArgs<ExtArgs> = {}>(args?: Subset<T, User$donationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DonationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    donors<T extends User$donorsArgs<ExtArgs> = {}>(args?: Subset<T, User$donorsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DonorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4075,6 +4179,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DonationScalarFieldEnum | DonationScalarFieldEnum[]
+  }
+
+  /**
+   * User.donors
+   */
+  export type User$donorsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Donor
+     */
+    select?: DonorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Donor
+     */
+    omit?: DonorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonorInclude<ExtArgs> | null
+    where?: DonorWhereInput
+    orderBy?: DonorOrderByWithRelationInput | DonorOrderByWithRelationInput[]
+    cursor?: DonorWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DonorScalarFieldEnum | DonorScalarFieldEnum[]
   }
 
   /**
@@ -9934,6 +10062,1338 @@ export namespace Prisma {
 
 
   /**
+   * Model Donor
+   */
+
+  export type AggregateDonor = {
+    _count: DonorCountAggregateOutputType | null
+    _avg: DonorAvgAggregateOutputType | null
+    _sum: DonorSumAggregateOutputType | null
+    _min: DonorMinAggregateOutputType | null
+    _max: DonorMaxAggregateOutputType | null
+  }
+
+  export type DonorAvgAggregateOutputType = {
+    totalDonated: number | null
+    donationCount: number | null
+    campaignCount: number | null
+  }
+
+  export type DonorSumAggregateOutputType = {
+    totalDonated: number | null
+    donationCount: number | null
+    campaignCount: number | null
+  }
+
+  export type DonorMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    name: string | null
+    email: string | null
+    phone: string | null
+    image: string | null
+    address: string | null
+    city: string | null
+    district: string | null
+    country: string | null
+    totalDonated: number | null
+    donationCount: number | null
+    campaignCount: number | null
+    lastDonatedAt: Date | null
+    isAnonymous: boolean | null
+    receiveUpdates: boolean | null
+    receiveReceipt: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DonorMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    name: string | null
+    email: string | null
+    phone: string | null
+    image: string | null
+    address: string | null
+    city: string | null
+    district: string | null
+    country: string | null
+    totalDonated: number | null
+    donationCount: number | null
+    campaignCount: number | null
+    lastDonatedAt: Date | null
+    isAnonymous: boolean | null
+    receiveUpdates: boolean | null
+    receiveReceipt: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DonorCountAggregateOutputType = {
+    id: number
+    userId: number
+    name: number
+    email: number
+    phone: number
+    image: number
+    address: number
+    city: number
+    district: number
+    country: number
+    totalDonated: number
+    donationCount: number
+    campaignCount: number
+    lastDonatedAt: number
+    isAnonymous: number
+    receiveUpdates: number
+    receiveReceipt: number
+    isDeleted: number
+    deletedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type DonorAvgAggregateInputType = {
+    totalDonated?: true
+    donationCount?: true
+    campaignCount?: true
+  }
+
+  export type DonorSumAggregateInputType = {
+    totalDonated?: true
+    donationCount?: true
+    campaignCount?: true
+  }
+
+  export type DonorMinAggregateInputType = {
+    id?: true
+    userId?: true
+    name?: true
+    email?: true
+    phone?: true
+    image?: true
+    address?: true
+    city?: true
+    district?: true
+    country?: true
+    totalDonated?: true
+    donationCount?: true
+    campaignCount?: true
+    lastDonatedAt?: true
+    isAnonymous?: true
+    receiveUpdates?: true
+    receiveReceipt?: true
+    isDeleted?: true
+    deletedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DonorMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    name?: true
+    email?: true
+    phone?: true
+    image?: true
+    address?: true
+    city?: true
+    district?: true
+    country?: true
+    totalDonated?: true
+    donationCount?: true
+    campaignCount?: true
+    lastDonatedAt?: true
+    isAnonymous?: true
+    receiveUpdates?: true
+    receiveReceipt?: true
+    isDeleted?: true
+    deletedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DonorCountAggregateInputType = {
+    id?: true
+    userId?: true
+    name?: true
+    email?: true
+    phone?: true
+    image?: true
+    address?: true
+    city?: true
+    district?: true
+    country?: true
+    totalDonated?: true
+    donationCount?: true
+    campaignCount?: true
+    lastDonatedAt?: true
+    isAnonymous?: true
+    receiveUpdates?: true
+    receiveReceipt?: true
+    isDeleted?: true
+    deletedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type DonorAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Donor to aggregate.
+     */
+    where?: DonorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Donors to fetch.
+     */
+    orderBy?: DonorOrderByWithRelationInput | DonorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DonorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Donors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Donors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Donors
+    **/
+    _count?: true | DonorCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DonorAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DonorSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DonorMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DonorMaxAggregateInputType
+  }
+
+  export type GetDonorAggregateType<T extends DonorAggregateArgs> = {
+        [P in keyof T & keyof AggregateDonor]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDonor[P]>
+      : GetScalarType<T[P], AggregateDonor[P]>
+  }
+
+
+
+
+  export type DonorGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DonorWhereInput
+    orderBy?: DonorOrderByWithAggregationInput | DonorOrderByWithAggregationInput[]
+    by: DonorScalarFieldEnum[] | DonorScalarFieldEnum
+    having?: DonorScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DonorCountAggregateInputType | true
+    _avg?: DonorAvgAggregateInputType
+    _sum?: DonorSumAggregateInputType
+    _min?: DonorMinAggregateInputType
+    _max?: DonorMaxAggregateInputType
+  }
+
+  export type DonorGroupByOutputType = {
+    id: string
+    userId: string | null
+    name: string
+    email: string
+    phone: string | null
+    image: string | null
+    address: string | null
+    city: string | null
+    district: string | null
+    country: string
+    totalDonated: number
+    donationCount: number
+    campaignCount: number
+    lastDonatedAt: Date | null
+    isAnonymous: boolean
+    receiveUpdates: boolean
+    receiveReceipt: boolean
+    isDeleted: boolean
+    deletedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: DonorCountAggregateOutputType | null
+    _avg: DonorAvgAggregateOutputType | null
+    _sum: DonorSumAggregateOutputType | null
+    _min: DonorMinAggregateOutputType | null
+    _max: DonorMaxAggregateOutputType | null
+  }
+
+  type GetDonorGroupByPayload<T extends DonorGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DonorGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DonorGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DonorGroupByOutputType[P]>
+            : GetScalarType<T[P], DonorGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DonorSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    name?: boolean
+    email?: boolean
+    phone?: boolean
+    image?: boolean
+    address?: boolean
+    city?: boolean
+    district?: boolean
+    country?: boolean
+    totalDonated?: boolean
+    donationCount?: boolean
+    campaignCount?: boolean
+    lastDonatedAt?: boolean
+    isAnonymous?: boolean
+    receiveUpdates?: boolean
+    receiveReceipt?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | Donor$userArgs<ExtArgs>
+  }, ExtArgs["result"]["donor"]>
+
+  export type DonorSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    name?: boolean
+    email?: boolean
+    phone?: boolean
+    image?: boolean
+    address?: boolean
+    city?: boolean
+    district?: boolean
+    country?: boolean
+    totalDonated?: boolean
+    donationCount?: boolean
+    campaignCount?: boolean
+    lastDonatedAt?: boolean
+    isAnonymous?: boolean
+    receiveUpdates?: boolean
+    receiveReceipt?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | Donor$userArgs<ExtArgs>
+  }, ExtArgs["result"]["donor"]>
+
+  export type DonorSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    name?: boolean
+    email?: boolean
+    phone?: boolean
+    image?: boolean
+    address?: boolean
+    city?: boolean
+    district?: boolean
+    country?: boolean
+    totalDonated?: boolean
+    donationCount?: boolean
+    campaignCount?: boolean
+    lastDonatedAt?: boolean
+    isAnonymous?: boolean
+    receiveUpdates?: boolean
+    receiveReceipt?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | Donor$userArgs<ExtArgs>
+  }, ExtArgs["result"]["donor"]>
+
+  export type DonorSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    name?: boolean
+    email?: boolean
+    phone?: boolean
+    image?: boolean
+    address?: boolean
+    city?: boolean
+    district?: boolean
+    country?: boolean
+    totalDonated?: boolean
+    donationCount?: boolean
+    campaignCount?: boolean
+    lastDonatedAt?: boolean
+    isAnonymous?: boolean
+    receiveUpdates?: boolean
+    receiveReceipt?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type DonorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "email" | "phone" | "image" | "address" | "city" | "district" | "country" | "totalDonated" | "donationCount" | "campaignCount" | "lastDonatedAt" | "isAnonymous" | "receiveUpdates" | "receiveReceipt" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["donor"]>
+  export type DonorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | Donor$userArgs<ExtArgs>
+  }
+  export type DonorIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | Donor$userArgs<ExtArgs>
+  }
+  export type DonorIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | Donor$userArgs<ExtArgs>
+  }
+
+  export type $DonorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Donor"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string | null
+      name: string
+      email: string
+      phone: string | null
+      image: string | null
+      address: string | null
+      city: string | null
+      district: string | null
+      country: string
+      totalDonated: number
+      donationCount: number
+      campaignCount: number
+      lastDonatedAt: Date | null
+      isAnonymous: boolean
+      receiveUpdates: boolean
+      receiveReceipt: boolean
+      isDeleted: boolean
+      deletedAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["donor"]>
+    composites: {}
+  }
+
+  type DonorGetPayload<S extends boolean | null | undefined | DonorDefaultArgs> = $Result.GetResult<Prisma.$DonorPayload, S>
+
+  type DonorCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DonorFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DonorCountAggregateInputType | true
+    }
+
+  export interface DonorDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Donor'], meta: { name: 'Donor' } }
+    /**
+     * Find zero or one Donor that matches the filter.
+     * @param {DonorFindUniqueArgs} args - Arguments to find a Donor
+     * @example
+     * // Get one Donor
+     * const donor = await prisma.donor.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DonorFindUniqueArgs>(args: SelectSubset<T, DonorFindUniqueArgs<ExtArgs>>): Prisma__DonorClient<$Result.GetResult<Prisma.$DonorPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Donor that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DonorFindUniqueOrThrowArgs} args - Arguments to find a Donor
+     * @example
+     * // Get one Donor
+     * const donor = await prisma.donor.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DonorFindUniqueOrThrowArgs>(args: SelectSubset<T, DonorFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DonorClient<$Result.GetResult<Prisma.$DonorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Donor that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DonorFindFirstArgs} args - Arguments to find a Donor
+     * @example
+     * // Get one Donor
+     * const donor = await prisma.donor.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DonorFindFirstArgs>(args?: SelectSubset<T, DonorFindFirstArgs<ExtArgs>>): Prisma__DonorClient<$Result.GetResult<Prisma.$DonorPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Donor that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DonorFindFirstOrThrowArgs} args - Arguments to find a Donor
+     * @example
+     * // Get one Donor
+     * const donor = await prisma.donor.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DonorFindFirstOrThrowArgs>(args?: SelectSubset<T, DonorFindFirstOrThrowArgs<ExtArgs>>): Prisma__DonorClient<$Result.GetResult<Prisma.$DonorPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Donors that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DonorFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Donors
+     * const donors = await prisma.donor.findMany()
+     * 
+     * // Get first 10 Donors
+     * const donors = await prisma.donor.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const donorWithIdOnly = await prisma.donor.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DonorFindManyArgs>(args?: SelectSubset<T, DonorFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DonorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Donor.
+     * @param {DonorCreateArgs} args - Arguments to create a Donor.
+     * @example
+     * // Create one Donor
+     * const Donor = await prisma.donor.create({
+     *   data: {
+     *     // ... data to create a Donor
+     *   }
+     * })
+     * 
+     */
+    create<T extends DonorCreateArgs>(args: SelectSubset<T, DonorCreateArgs<ExtArgs>>): Prisma__DonorClient<$Result.GetResult<Prisma.$DonorPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Donors.
+     * @param {DonorCreateManyArgs} args - Arguments to create many Donors.
+     * @example
+     * // Create many Donors
+     * const donor = await prisma.donor.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DonorCreateManyArgs>(args?: SelectSubset<T, DonorCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Donors and returns the data saved in the database.
+     * @param {DonorCreateManyAndReturnArgs} args - Arguments to create many Donors.
+     * @example
+     * // Create many Donors
+     * const donor = await prisma.donor.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Donors and only return the `id`
+     * const donorWithIdOnly = await prisma.donor.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DonorCreateManyAndReturnArgs>(args?: SelectSubset<T, DonorCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DonorPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Donor.
+     * @param {DonorDeleteArgs} args - Arguments to delete one Donor.
+     * @example
+     * // Delete one Donor
+     * const Donor = await prisma.donor.delete({
+     *   where: {
+     *     // ... filter to delete one Donor
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DonorDeleteArgs>(args: SelectSubset<T, DonorDeleteArgs<ExtArgs>>): Prisma__DonorClient<$Result.GetResult<Prisma.$DonorPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Donor.
+     * @param {DonorUpdateArgs} args - Arguments to update one Donor.
+     * @example
+     * // Update one Donor
+     * const donor = await prisma.donor.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DonorUpdateArgs>(args: SelectSubset<T, DonorUpdateArgs<ExtArgs>>): Prisma__DonorClient<$Result.GetResult<Prisma.$DonorPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Donors.
+     * @param {DonorDeleteManyArgs} args - Arguments to filter Donors to delete.
+     * @example
+     * // Delete a few Donors
+     * const { count } = await prisma.donor.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DonorDeleteManyArgs>(args?: SelectSubset<T, DonorDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Donors.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DonorUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Donors
+     * const donor = await prisma.donor.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DonorUpdateManyArgs>(args: SelectSubset<T, DonorUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Donors and returns the data updated in the database.
+     * @param {DonorUpdateManyAndReturnArgs} args - Arguments to update many Donors.
+     * @example
+     * // Update many Donors
+     * const donor = await prisma.donor.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Donors and only return the `id`
+     * const donorWithIdOnly = await prisma.donor.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DonorUpdateManyAndReturnArgs>(args: SelectSubset<T, DonorUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DonorPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Donor.
+     * @param {DonorUpsertArgs} args - Arguments to update or create a Donor.
+     * @example
+     * // Update or create a Donor
+     * const donor = await prisma.donor.upsert({
+     *   create: {
+     *     // ... data to create a Donor
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Donor we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DonorUpsertArgs>(args: SelectSubset<T, DonorUpsertArgs<ExtArgs>>): Prisma__DonorClient<$Result.GetResult<Prisma.$DonorPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Donors.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DonorCountArgs} args - Arguments to filter Donors to count.
+     * @example
+     * // Count the number of Donors
+     * const count = await prisma.donor.count({
+     *   where: {
+     *     // ... the filter for the Donors we want to count
+     *   }
+     * })
+    **/
+    count<T extends DonorCountArgs>(
+      args?: Subset<T, DonorCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DonorCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Donor.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DonorAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DonorAggregateArgs>(args: Subset<T, DonorAggregateArgs>): Prisma.PrismaPromise<GetDonorAggregateType<T>>
+
+    /**
+     * Group by Donor.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DonorGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DonorGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DonorGroupByArgs['orderBy'] }
+        : { orderBy?: DonorGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DonorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDonorGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Donor model
+   */
+  readonly fields: DonorFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Donor.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DonorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends Donor$userArgs<ExtArgs> = {}>(args?: Subset<T, Donor$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Donor model
+   */
+  interface DonorFieldRefs {
+    readonly id: FieldRef<"Donor", 'String'>
+    readonly userId: FieldRef<"Donor", 'String'>
+    readonly name: FieldRef<"Donor", 'String'>
+    readonly email: FieldRef<"Donor", 'String'>
+    readonly phone: FieldRef<"Donor", 'String'>
+    readonly image: FieldRef<"Donor", 'String'>
+    readonly address: FieldRef<"Donor", 'String'>
+    readonly city: FieldRef<"Donor", 'String'>
+    readonly district: FieldRef<"Donor", 'String'>
+    readonly country: FieldRef<"Donor", 'String'>
+    readonly totalDonated: FieldRef<"Donor", 'Float'>
+    readonly donationCount: FieldRef<"Donor", 'Int'>
+    readonly campaignCount: FieldRef<"Donor", 'Int'>
+    readonly lastDonatedAt: FieldRef<"Donor", 'DateTime'>
+    readonly isAnonymous: FieldRef<"Donor", 'Boolean'>
+    readonly receiveUpdates: FieldRef<"Donor", 'Boolean'>
+    readonly receiveReceipt: FieldRef<"Donor", 'Boolean'>
+    readonly isDeleted: FieldRef<"Donor", 'Boolean'>
+    readonly deletedAt: FieldRef<"Donor", 'DateTime'>
+    readonly createdAt: FieldRef<"Donor", 'DateTime'>
+    readonly updatedAt: FieldRef<"Donor", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Donor findUnique
+   */
+  export type DonorFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Donor
+     */
+    select?: DonorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Donor
+     */
+    omit?: DonorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonorInclude<ExtArgs> | null
+    /**
+     * Filter, which Donor to fetch.
+     */
+    where: DonorWhereUniqueInput
+  }
+
+  /**
+   * Donor findUniqueOrThrow
+   */
+  export type DonorFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Donor
+     */
+    select?: DonorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Donor
+     */
+    omit?: DonorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonorInclude<ExtArgs> | null
+    /**
+     * Filter, which Donor to fetch.
+     */
+    where: DonorWhereUniqueInput
+  }
+
+  /**
+   * Donor findFirst
+   */
+  export type DonorFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Donor
+     */
+    select?: DonorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Donor
+     */
+    omit?: DonorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonorInclude<ExtArgs> | null
+    /**
+     * Filter, which Donor to fetch.
+     */
+    where?: DonorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Donors to fetch.
+     */
+    orderBy?: DonorOrderByWithRelationInput | DonorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Donors.
+     */
+    cursor?: DonorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Donors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Donors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Donors.
+     */
+    distinct?: DonorScalarFieldEnum | DonorScalarFieldEnum[]
+  }
+
+  /**
+   * Donor findFirstOrThrow
+   */
+  export type DonorFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Donor
+     */
+    select?: DonorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Donor
+     */
+    omit?: DonorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonorInclude<ExtArgs> | null
+    /**
+     * Filter, which Donor to fetch.
+     */
+    where?: DonorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Donors to fetch.
+     */
+    orderBy?: DonorOrderByWithRelationInput | DonorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Donors.
+     */
+    cursor?: DonorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Donors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Donors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Donors.
+     */
+    distinct?: DonorScalarFieldEnum | DonorScalarFieldEnum[]
+  }
+
+  /**
+   * Donor findMany
+   */
+  export type DonorFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Donor
+     */
+    select?: DonorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Donor
+     */
+    omit?: DonorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonorInclude<ExtArgs> | null
+    /**
+     * Filter, which Donors to fetch.
+     */
+    where?: DonorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Donors to fetch.
+     */
+    orderBy?: DonorOrderByWithRelationInput | DonorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Donors.
+     */
+    cursor?: DonorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Donors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Donors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Donors.
+     */
+    distinct?: DonorScalarFieldEnum | DonorScalarFieldEnum[]
+  }
+
+  /**
+   * Donor create
+   */
+  export type DonorCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Donor
+     */
+    select?: DonorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Donor
+     */
+    omit?: DonorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonorInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Donor.
+     */
+    data: XOR<DonorCreateInput, DonorUncheckedCreateInput>
+  }
+
+  /**
+   * Donor createMany
+   */
+  export type DonorCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Donors.
+     */
+    data: DonorCreateManyInput | DonorCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Donor createManyAndReturn
+   */
+  export type DonorCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Donor
+     */
+    select?: DonorSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Donor
+     */
+    omit?: DonorOmit<ExtArgs> | null
+    /**
+     * The data used to create many Donors.
+     */
+    data: DonorCreateManyInput | DonorCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonorIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Donor update
+   */
+  export type DonorUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Donor
+     */
+    select?: DonorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Donor
+     */
+    omit?: DonorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonorInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Donor.
+     */
+    data: XOR<DonorUpdateInput, DonorUncheckedUpdateInput>
+    /**
+     * Choose, which Donor to update.
+     */
+    where: DonorWhereUniqueInput
+  }
+
+  /**
+   * Donor updateMany
+   */
+  export type DonorUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Donors.
+     */
+    data: XOR<DonorUpdateManyMutationInput, DonorUncheckedUpdateManyInput>
+    /**
+     * Filter which Donors to update
+     */
+    where?: DonorWhereInput
+    /**
+     * Limit how many Donors to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Donor updateManyAndReturn
+   */
+  export type DonorUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Donor
+     */
+    select?: DonorSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Donor
+     */
+    omit?: DonorOmit<ExtArgs> | null
+    /**
+     * The data used to update Donors.
+     */
+    data: XOR<DonorUpdateManyMutationInput, DonorUncheckedUpdateManyInput>
+    /**
+     * Filter which Donors to update
+     */
+    where?: DonorWhereInput
+    /**
+     * Limit how many Donors to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonorIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Donor upsert
+   */
+  export type DonorUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Donor
+     */
+    select?: DonorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Donor
+     */
+    omit?: DonorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonorInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Donor to update in case it exists.
+     */
+    where: DonorWhereUniqueInput
+    /**
+     * In case the Donor found by the `where` argument doesn't exist, create a new Donor with this data.
+     */
+    create: XOR<DonorCreateInput, DonorUncheckedCreateInput>
+    /**
+     * In case the Donor was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DonorUpdateInput, DonorUncheckedUpdateInput>
+  }
+
+  /**
+   * Donor delete
+   */
+  export type DonorDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Donor
+     */
+    select?: DonorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Donor
+     */
+    omit?: DonorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonorInclude<ExtArgs> | null
+    /**
+     * Filter which Donor to delete.
+     */
+    where: DonorWhereUniqueInput
+  }
+
+  /**
+   * Donor deleteMany
+   */
+  export type DonorDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Donors to delete
+     */
+    where?: DonorWhereInput
+    /**
+     * Limit how many Donors to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Donor.user
+   */
+  export type Donor$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Donor without action
+   */
+  export type DonorDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Donor
+     */
+    select?: DonorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Donor
+     */
+    omit?: DonorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonorInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Event
    */
 
@@ -11221,6 +12681,33 @@ export namespace Prisma {
   export type DonationScalarFieldEnum = (typeof DonationScalarFieldEnum)[keyof typeof DonationScalarFieldEnum]
 
 
+  export const DonorScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    name: 'name',
+    email: 'email',
+    phone: 'phone',
+    image: 'image',
+    address: 'address',
+    city: 'city',
+    district: 'district',
+    country: 'country',
+    totalDonated: 'totalDonated',
+    donationCount: 'donationCount',
+    campaignCount: 'campaignCount',
+    lastDonatedAt: 'lastDonatedAt',
+    isAnonymous: 'isAnonymous',
+    receiveUpdates: 'receiveUpdates',
+    receiveReceipt: 'receiveReceipt',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type DonorScalarFieldEnum = (typeof DonorScalarFieldEnum)[keyof typeof DonorScalarFieldEnum]
+
+
   export const EventScalarFieldEnum: {
     id: 'id',
     title: 'title',
@@ -11602,6 +13089,7 @@ export namespace Prisma {
     accounts?: AccountListRelationFilter
     admins?: XOR<AdminNullableScalarRelationFilter, AdminWhereInput> | null
     donations?: DonationListRelationFilter
+    donors?: DonorListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -11621,6 +13109,7 @@ export namespace Prisma {
     accounts?: AccountOrderByRelationAggregateInput
     admins?: AdminOrderByWithRelationInput
     donations?: DonationOrderByRelationAggregateInput
+    donors?: DonorOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -11643,6 +13132,7 @@ export namespace Prisma {
     accounts?: AccountListRelationFilter
     admins?: XOR<AdminNullableScalarRelationFilter, AdminWhereInput> | null
     donations?: DonationListRelationFilter
+    donors?: DonorListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -12135,6 +13625,143 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Donation"> | Date | string
   }
 
+  export type DonorWhereInput = {
+    AND?: DonorWhereInput | DonorWhereInput[]
+    OR?: DonorWhereInput[]
+    NOT?: DonorWhereInput | DonorWhereInput[]
+    id?: StringFilter<"Donor"> | string
+    userId?: StringNullableFilter<"Donor"> | string | null
+    name?: StringFilter<"Donor"> | string
+    email?: StringFilter<"Donor"> | string
+    phone?: StringNullableFilter<"Donor"> | string | null
+    image?: StringNullableFilter<"Donor"> | string | null
+    address?: StringNullableFilter<"Donor"> | string | null
+    city?: StringNullableFilter<"Donor"> | string | null
+    district?: StringNullableFilter<"Donor"> | string | null
+    country?: StringFilter<"Donor"> | string
+    totalDonated?: FloatFilter<"Donor"> | number
+    donationCount?: IntFilter<"Donor"> | number
+    campaignCount?: IntFilter<"Donor"> | number
+    lastDonatedAt?: DateTimeNullableFilter<"Donor"> | Date | string | null
+    isAnonymous?: BoolFilter<"Donor"> | boolean
+    receiveUpdates?: BoolFilter<"Donor"> | boolean
+    receiveReceipt?: BoolFilter<"Donor"> | boolean
+    isDeleted?: BoolFilter<"Donor"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Donor"> | Date | string | null
+    createdAt?: DateTimeFilter<"Donor"> | Date | string
+    updatedAt?: DateTimeFilter<"Donor"> | Date | string
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }
+
+  export type DonorOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrderInput | SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    phone?: SortOrderInput | SortOrder
+    image?: SortOrderInput | SortOrder
+    address?: SortOrderInput | SortOrder
+    city?: SortOrderInput | SortOrder
+    district?: SortOrderInput | SortOrder
+    country?: SortOrder
+    totalDonated?: SortOrder
+    donationCount?: SortOrder
+    campaignCount?: SortOrder
+    lastDonatedAt?: SortOrderInput | SortOrder
+    isAnonymous?: SortOrder
+    receiveUpdates?: SortOrder
+    receiveReceipt?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type DonorWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId?: string
+    email?: string
+    AND?: DonorWhereInput | DonorWhereInput[]
+    OR?: DonorWhereInput[]
+    NOT?: DonorWhereInput | DonorWhereInput[]
+    name?: StringFilter<"Donor"> | string
+    phone?: StringNullableFilter<"Donor"> | string | null
+    image?: StringNullableFilter<"Donor"> | string | null
+    address?: StringNullableFilter<"Donor"> | string | null
+    city?: StringNullableFilter<"Donor"> | string | null
+    district?: StringNullableFilter<"Donor"> | string | null
+    country?: StringFilter<"Donor"> | string
+    totalDonated?: FloatFilter<"Donor"> | number
+    donationCount?: IntFilter<"Donor"> | number
+    campaignCount?: IntFilter<"Donor"> | number
+    lastDonatedAt?: DateTimeNullableFilter<"Donor"> | Date | string | null
+    isAnonymous?: BoolFilter<"Donor"> | boolean
+    receiveUpdates?: BoolFilter<"Donor"> | boolean
+    receiveReceipt?: BoolFilter<"Donor"> | boolean
+    isDeleted?: BoolFilter<"Donor"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Donor"> | Date | string | null
+    createdAt?: DateTimeFilter<"Donor"> | Date | string
+    updatedAt?: DateTimeFilter<"Donor"> | Date | string
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "id" | "userId" | "email">
+
+  export type DonorOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrderInput | SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    phone?: SortOrderInput | SortOrder
+    image?: SortOrderInput | SortOrder
+    address?: SortOrderInput | SortOrder
+    city?: SortOrderInput | SortOrder
+    district?: SortOrderInput | SortOrder
+    country?: SortOrder
+    totalDonated?: SortOrder
+    donationCount?: SortOrder
+    campaignCount?: SortOrder
+    lastDonatedAt?: SortOrderInput | SortOrder
+    isAnonymous?: SortOrder
+    receiveUpdates?: SortOrder
+    receiveReceipt?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: DonorCountOrderByAggregateInput
+    _avg?: DonorAvgOrderByAggregateInput
+    _max?: DonorMaxOrderByAggregateInput
+    _min?: DonorMinOrderByAggregateInput
+    _sum?: DonorSumOrderByAggregateInput
+  }
+
+  export type DonorScalarWhereWithAggregatesInput = {
+    AND?: DonorScalarWhereWithAggregatesInput | DonorScalarWhereWithAggregatesInput[]
+    OR?: DonorScalarWhereWithAggregatesInput[]
+    NOT?: DonorScalarWhereWithAggregatesInput | DonorScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Donor"> | string
+    userId?: StringNullableWithAggregatesFilter<"Donor"> | string | null
+    name?: StringWithAggregatesFilter<"Donor"> | string
+    email?: StringWithAggregatesFilter<"Donor"> | string
+    phone?: StringNullableWithAggregatesFilter<"Donor"> | string | null
+    image?: StringNullableWithAggregatesFilter<"Donor"> | string | null
+    address?: StringNullableWithAggregatesFilter<"Donor"> | string | null
+    city?: StringNullableWithAggregatesFilter<"Donor"> | string | null
+    district?: StringNullableWithAggregatesFilter<"Donor"> | string | null
+    country?: StringWithAggregatesFilter<"Donor"> | string
+    totalDonated?: FloatWithAggregatesFilter<"Donor"> | number
+    donationCount?: IntWithAggregatesFilter<"Donor"> | number
+    campaignCount?: IntWithAggregatesFilter<"Donor"> | number
+    lastDonatedAt?: DateTimeNullableWithAggregatesFilter<"Donor"> | Date | string | null
+    isAnonymous?: BoolWithAggregatesFilter<"Donor"> | boolean
+    receiveUpdates?: BoolWithAggregatesFilter<"Donor"> | boolean
+    receiveReceipt?: BoolWithAggregatesFilter<"Donor"> | boolean
+    isDeleted?: BoolWithAggregatesFilter<"Donor"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Donor"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Donor"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Donor"> | Date | string
+  }
+
   export type EventWhereInput = {
     AND?: EventWhereInput | EventWhereInput[]
     OR?: EventWhereInput[]
@@ -12334,6 +13961,7 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     admins?: AdminCreateNestedOneWithoutUserInput
     donations?: DonationCreateNestedManyWithoutUserInput
+    donors?: DonorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -12353,6 +13981,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     admins?: AdminUncheckedCreateNestedOneWithoutUserInput
     donations?: DonationUncheckedCreateNestedManyWithoutUserInput
+    donors?: DonorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -12372,6 +14001,7 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     admins?: AdminUpdateOneWithoutUserNestedInput
     donations?: DonationUpdateManyWithoutUserNestedInput
+    donors?: DonorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -12391,6 +14021,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     admins?: AdminUncheckedUpdateOneWithoutUserNestedInput
     donations?: DonationUncheckedUpdateManyWithoutUserNestedInput
+    donors?: DonorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -12963,6 +14594,173 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type DonorCreateInput = {
+    id?: string
+    name: string
+    email: string
+    phone?: string | null
+    image?: string | null
+    address?: string | null
+    city?: string | null
+    district?: string | null
+    country?: string
+    totalDonated?: number
+    donationCount?: number
+    campaignCount?: number
+    lastDonatedAt?: Date | string | null
+    isAnonymous?: boolean
+    receiveUpdates?: boolean
+    receiveReceipt?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user?: UserCreateNestedOneWithoutDonorsInput
+  }
+
+  export type DonorUncheckedCreateInput = {
+    id?: string
+    userId?: string | null
+    name: string
+    email: string
+    phone?: string | null
+    image?: string | null
+    address?: string | null
+    city?: string | null
+    district?: string | null
+    country?: string
+    totalDonated?: number
+    donationCount?: number
+    campaignCount?: number
+    lastDonatedAt?: Date | string | null
+    isAnonymous?: boolean
+    receiveUpdates?: boolean
+    receiveReceipt?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DonorUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    district?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: StringFieldUpdateOperationsInput | string
+    totalDonated?: FloatFieldUpdateOperationsInput | number
+    donationCount?: IntFieldUpdateOperationsInput | number
+    campaignCount?: IntFieldUpdateOperationsInput | number
+    lastDonatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    receiveUpdates?: BoolFieldUpdateOperationsInput | boolean
+    receiveReceipt?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutDonorsNestedInput
+  }
+
+  export type DonorUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    district?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: StringFieldUpdateOperationsInput | string
+    totalDonated?: FloatFieldUpdateOperationsInput | number
+    donationCount?: IntFieldUpdateOperationsInput | number
+    campaignCount?: IntFieldUpdateOperationsInput | number
+    lastDonatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    receiveUpdates?: BoolFieldUpdateOperationsInput | boolean
+    receiveReceipt?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DonorCreateManyInput = {
+    id?: string
+    userId?: string | null
+    name: string
+    email: string
+    phone?: string | null
+    image?: string | null
+    address?: string | null
+    city?: string | null
+    district?: string | null
+    country?: string
+    totalDonated?: number
+    donationCount?: number
+    campaignCount?: number
+    lastDonatedAt?: Date | string | null
+    isAnonymous?: boolean
+    receiveUpdates?: boolean
+    receiveReceipt?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DonorUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    district?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: StringFieldUpdateOperationsInput | string
+    totalDonated?: FloatFieldUpdateOperationsInput | number
+    donationCount?: IntFieldUpdateOperationsInput | number
+    campaignCount?: IntFieldUpdateOperationsInput | number
+    lastDonatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    receiveUpdates?: BoolFieldUpdateOperationsInput | boolean
+    receiveReceipt?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DonorUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    district?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: StringFieldUpdateOperationsInput | string
+    totalDonated?: FloatFieldUpdateOperationsInput | number
+    donationCount?: IntFieldUpdateOperationsInput | number
+    campaignCount?: IntFieldUpdateOperationsInput | number
+    lastDonatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    receiveUpdates?: BoolFieldUpdateOperationsInput | boolean
+    receiveReceipt?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type EventCreateInput = {
     id?: string
     title: string
@@ -13293,6 +15091,12 @@ export namespace Prisma {
     none?: DonationWhereInput
   }
 
+  export type DonorListRelationFilter = {
+    every?: DonorWhereInput
+    some?: DonorWhereInput
+    none?: DonorWhereInput
+  }
+
   export type SessionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -13302,6 +15106,10 @@ export namespace Prisma {
   }
 
   export type DonationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DonorOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -13829,6 +15637,90 @@ export namespace Prisma {
     _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
+  export type DonorCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    image?: SortOrder
+    address?: SortOrder
+    city?: SortOrder
+    district?: SortOrder
+    country?: SortOrder
+    totalDonated?: SortOrder
+    donationCount?: SortOrder
+    campaignCount?: SortOrder
+    lastDonatedAt?: SortOrder
+    isAnonymous?: SortOrder
+    receiveUpdates?: SortOrder
+    receiveReceipt?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DonorAvgOrderByAggregateInput = {
+    totalDonated?: SortOrder
+    donationCount?: SortOrder
+    campaignCount?: SortOrder
+  }
+
+  export type DonorMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    image?: SortOrder
+    address?: SortOrder
+    city?: SortOrder
+    district?: SortOrder
+    country?: SortOrder
+    totalDonated?: SortOrder
+    donationCount?: SortOrder
+    campaignCount?: SortOrder
+    lastDonatedAt?: SortOrder
+    isAnonymous?: SortOrder
+    receiveUpdates?: SortOrder
+    receiveReceipt?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DonorMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    image?: SortOrder
+    address?: SortOrder
+    city?: SortOrder
+    district?: SortOrder
+    country?: SortOrder
+    totalDonated?: SortOrder
+    donationCount?: SortOrder
+    campaignCount?: SortOrder
+    lastDonatedAt?: SortOrder
+    isAnonymous?: SortOrder
+    receiveUpdates?: SortOrder
+    receiveReceipt?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DonorSumOrderByAggregateInput = {
+    totalDonated?: SortOrder
+    donationCount?: SortOrder
+    campaignCount?: SortOrder
+  }
+
   export type EnumEventTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.EventType | EnumEventTypeFieldRefInput<$PrismaModel>
     in?: $Enums.EventType[] | ListEnumEventTypeFieldRefInput<$PrismaModel>
@@ -14010,6 +15902,13 @@ export namespace Prisma {
     connect?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
   }
 
+  export type DonorCreateNestedManyWithoutUserInput = {
+    create?: XOR<DonorCreateWithoutUserInput, DonorUncheckedCreateWithoutUserInput> | DonorCreateWithoutUserInput[] | DonorUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DonorCreateOrConnectWithoutUserInput | DonorCreateOrConnectWithoutUserInput[]
+    createMany?: DonorCreateManyUserInputEnvelope
+    connect?: DonorWhereUniqueInput | DonorWhereUniqueInput[]
+  }
+
   export type SessionUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -14035,6 +15934,13 @@ export namespace Prisma {
     connectOrCreate?: DonationCreateOrConnectWithoutUserInput | DonationCreateOrConnectWithoutUserInput[]
     createMany?: DonationCreateManyUserInputEnvelope
     connect?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
+  }
+
+  export type DonorUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<DonorCreateWithoutUserInput, DonorUncheckedCreateWithoutUserInput> | DonorCreateWithoutUserInput[] | DonorUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DonorCreateOrConnectWithoutUserInput | DonorCreateOrConnectWithoutUserInput[]
+    createMany?: DonorCreateManyUserInputEnvelope
+    connect?: DonorWhereUniqueInput | DonorWhereUniqueInput[]
   }
 
   export type EnumRoleFieldUpdateOperationsInput = {
@@ -14101,6 +16007,20 @@ export namespace Prisma {
     deleteMany?: DonationScalarWhereInput | DonationScalarWhereInput[]
   }
 
+  export type DonorUpdateManyWithoutUserNestedInput = {
+    create?: XOR<DonorCreateWithoutUserInput, DonorUncheckedCreateWithoutUserInput> | DonorCreateWithoutUserInput[] | DonorUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DonorCreateOrConnectWithoutUserInput | DonorCreateOrConnectWithoutUserInput[]
+    upsert?: DonorUpsertWithWhereUniqueWithoutUserInput | DonorUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: DonorCreateManyUserInputEnvelope
+    set?: DonorWhereUniqueInput | DonorWhereUniqueInput[]
+    disconnect?: DonorWhereUniqueInput | DonorWhereUniqueInput[]
+    delete?: DonorWhereUniqueInput | DonorWhereUniqueInput[]
+    connect?: DonorWhereUniqueInput | DonorWhereUniqueInput[]
+    update?: DonorUpdateWithWhereUniqueWithoutUserInput | DonorUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: DonorUpdateManyWithWhereWithoutUserInput | DonorUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: DonorScalarWhereInput | DonorScalarWhereInput[]
+  }
+
   export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -14151,6 +16071,20 @@ export namespace Prisma {
     update?: DonationUpdateWithWhereUniqueWithoutUserInput | DonationUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: DonationUpdateManyWithWhereWithoutUserInput | DonationUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: DonationScalarWhereInput | DonationScalarWhereInput[]
+  }
+
+  export type DonorUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<DonorCreateWithoutUserInput, DonorUncheckedCreateWithoutUserInput> | DonorCreateWithoutUserInput[] | DonorUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DonorCreateOrConnectWithoutUserInput | DonorCreateOrConnectWithoutUserInput[]
+    upsert?: DonorUpsertWithWhereUniqueWithoutUserInput | DonorUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: DonorCreateManyUserInputEnvelope
+    set?: DonorWhereUniqueInput | DonorWhereUniqueInput[]
+    disconnect?: DonorWhereUniqueInput | DonorWhereUniqueInput[]
+    delete?: DonorWhereUniqueInput | DonorWhereUniqueInput[]
+    connect?: DonorWhereUniqueInput | DonorWhereUniqueInput[]
+    update?: DonorUpdateWithWhereUniqueWithoutUserInput | DonorUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: DonorUpdateManyWithWhereWithoutUserInput | DonorUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: DonorScalarWhereInput | DonorScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutSessionsInput = {
@@ -14289,6 +16223,22 @@ export namespace Prisma {
     delete?: CampaignWhereInput | boolean
     connect?: CampaignWhereUniqueInput
     update?: XOR<XOR<CampaignUpdateToOneWithWhereWithoutDonationsInput, CampaignUpdateWithoutDonationsInput>, CampaignUncheckedUpdateWithoutDonationsInput>
+  }
+
+  export type UserCreateNestedOneWithoutDonorsInput = {
+    create?: XOR<UserCreateWithoutDonorsInput, UserUncheckedCreateWithoutDonorsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDonorsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneWithoutDonorsNestedInput = {
+    create?: XOR<UserCreateWithoutDonorsInput, UserUncheckedCreateWithoutDonorsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDonorsInput
+    upsert?: UserUpsertWithoutDonorsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDonorsInput, UserUpdateWithoutDonorsInput>, UserUncheckedUpdateWithoutDonorsInput>
   }
 
   export type EnumEventTypeFieldUpdateOperationsInput = {
@@ -14733,6 +16683,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     donations?: DonationCreateNestedManyWithoutUserInput
+    donors?: DonorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAdminsInput = {
@@ -14751,6 +16702,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     donations?: DonationUncheckedCreateNestedManyWithoutUserInput
+    donors?: DonorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAdminsInput = {
@@ -14785,6 +16737,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     donations?: DonationUpdateManyWithoutUserNestedInput
+    donors?: DonorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAdminsInput = {
@@ -14803,6 +16756,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     donations?: DonationUncheckedUpdateManyWithoutUserNestedInput
+    donors?: DonorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type SessionCreateWithoutUserInput = {
@@ -14946,6 +16900,62 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type DonorCreateWithoutUserInput = {
+    id?: string
+    name: string
+    email: string
+    phone?: string | null
+    image?: string | null
+    address?: string | null
+    city?: string | null
+    district?: string | null
+    country?: string
+    totalDonated?: number
+    donationCount?: number
+    campaignCount?: number
+    lastDonatedAt?: Date | string | null
+    isAnonymous?: boolean
+    receiveUpdates?: boolean
+    receiveReceipt?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DonorUncheckedCreateWithoutUserInput = {
+    id?: string
+    name: string
+    email: string
+    phone?: string | null
+    image?: string | null
+    address?: string | null
+    city?: string | null
+    district?: string | null
+    country?: string
+    totalDonated?: number
+    donationCount?: number
+    campaignCount?: number
+    lastDonatedAt?: Date | string | null
+    isAnonymous?: boolean
+    receiveUpdates?: boolean
+    receiveReceipt?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DonorCreateOrConnectWithoutUserInput = {
+    where: DonorWhereUniqueInput
+    create: XOR<DonorCreateWithoutUserInput, DonorUncheckedCreateWithoutUserInput>
+  }
+
+  export type DonorCreateManyUserInputEnvelope = {
+    data: DonorCreateManyUserInput | DonorCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type SessionUpsertWithWhereUniqueWithoutUserInput = {
     where: SessionWhereUniqueInput
     update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
@@ -15081,6 +17091,49 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Donation"> | Date | string
   }
 
+  export type DonorUpsertWithWhereUniqueWithoutUserInput = {
+    where: DonorWhereUniqueInput
+    update: XOR<DonorUpdateWithoutUserInput, DonorUncheckedUpdateWithoutUserInput>
+    create: XOR<DonorCreateWithoutUserInput, DonorUncheckedCreateWithoutUserInput>
+  }
+
+  export type DonorUpdateWithWhereUniqueWithoutUserInput = {
+    where: DonorWhereUniqueInput
+    data: XOR<DonorUpdateWithoutUserInput, DonorUncheckedUpdateWithoutUserInput>
+  }
+
+  export type DonorUpdateManyWithWhereWithoutUserInput = {
+    where: DonorScalarWhereInput
+    data: XOR<DonorUpdateManyMutationInput, DonorUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type DonorScalarWhereInput = {
+    AND?: DonorScalarWhereInput | DonorScalarWhereInput[]
+    OR?: DonorScalarWhereInput[]
+    NOT?: DonorScalarWhereInput | DonorScalarWhereInput[]
+    id?: StringFilter<"Donor"> | string
+    userId?: StringNullableFilter<"Donor"> | string | null
+    name?: StringFilter<"Donor"> | string
+    email?: StringFilter<"Donor"> | string
+    phone?: StringNullableFilter<"Donor"> | string | null
+    image?: StringNullableFilter<"Donor"> | string | null
+    address?: StringNullableFilter<"Donor"> | string | null
+    city?: StringNullableFilter<"Donor"> | string | null
+    district?: StringNullableFilter<"Donor"> | string | null
+    country?: StringFilter<"Donor"> | string
+    totalDonated?: FloatFilter<"Donor"> | number
+    donationCount?: IntFilter<"Donor"> | number
+    campaignCount?: IntFilter<"Donor"> | number
+    lastDonatedAt?: DateTimeNullableFilter<"Donor"> | Date | string | null
+    isAnonymous?: BoolFilter<"Donor"> | boolean
+    receiveUpdates?: BoolFilter<"Donor"> | boolean
+    receiveReceipt?: BoolFilter<"Donor"> | boolean
+    isDeleted?: BoolFilter<"Donor"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Donor"> | Date | string | null
+    createdAt?: DateTimeFilter<"Donor"> | Date | string
+    updatedAt?: DateTimeFilter<"Donor"> | Date | string
+  }
+
   export type UserCreateWithoutSessionsInput = {
     id?: string
     name: string
@@ -15097,6 +17150,7 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     admins?: AdminCreateNestedOneWithoutUserInput
     donations?: DonationCreateNestedManyWithoutUserInput
+    donors?: DonorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -15115,6 +17169,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     admins?: AdminUncheckedCreateNestedOneWithoutUserInput
     donations?: DonationUncheckedCreateNestedManyWithoutUserInput
+    donors?: DonorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -15149,6 +17204,7 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     admins?: AdminUpdateOneWithoutUserNestedInput
     donations?: DonationUpdateManyWithoutUserNestedInput
+    donors?: DonorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -15167,6 +17223,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     admins?: AdminUncheckedUpdateOneWithoutUserNestedInput
     donations?: DonationUncheckedUpdateManyWithoutUserNestedInput
+    donors?: DonorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -15185,6 +17242,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     admins?: AdminCreateNestedOneWithoutUserInput
     donations?: DonationCreateNestedManyWithoutUserInput
+    donors?: DonorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -15203,6 +17261,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     admins?: AdminUncheckedCreateNestedOneWithoutUserInput
     donations?: DonationUncheckedCreateNestedManyWithoutUserInput
+    donors?: DonorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -15237,6 +17296,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     admins?: AdminUpdateOneWithoutUserNestedInput
     donations?: DonationUpdateManyWithoutUserNestedInput
+    donors?: DonorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -15255,6 +17315,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     admins?: AdminUncheckedUpdateOneWithoutUserNestedInput
     donations?: DonationUncheckedUpdateManyWithoutUserNestedInput
+    donors?: DonorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type DonationCreateWithoutCampaignInput = {
@@ -15333,6 +17394,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     admins?: AdminCreateNestedOneWithoutUserInput
+    donors?: DonorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutDonationsInput = {
@@ -15351,6 +17413,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     admins?: AdminUncheckedCreateNestedOneWithoutUserInput
+    donors?: DonorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutDonationsInput = {
@@ -15432,6 +17495,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     admins?: AdminUpdateOneWithoutUserNestedInput
+    donors?: DonorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDonationsInput = {
@@ -15450,6 +17514,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     admins?: AdminUncheckedUpdateOneWithoutUserNestedInput
+    donors?: DonorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CampaignUpsertWithoutDonationsInput = {
@@ -15505,6 +17570,98 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UserCreateWithoutDonorsInput = {
+    id?: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    role?: $Enums.Role
+    status?: $Enums.UserStatus
+    needPasswordChange?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    admins?: AdminCreateNestedOneWithoutUserInput
+    donations?: DonationCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutDonorsInput = {
+    id?: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    role?: $Enums.Role
+    status?: $Enums.UserStatus
+    needPasswordChange?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    admins?: AdminUncheckedCreateNestedOneWithoutUserInput
+    donations?: DonationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutDonorsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutDonorsInput, UserUncheckedCreateWithoutDonorsInput>
+  }
+
+  export type UserUpsertWithoutDonorsInput = {
+    update: XOR<UserUpdateWithoutDonorsInput, UserUncheckedUpdateWithoutDonorsInput>
+    create: XOR<UserCreateWithoutDonorsInput, UserUncheckedCreateWithoutDonorsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutDonorsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutDonorsInput, UserUncheckedUpdateWithoutDonorsInput>
+  }
+
+  export type UserUpdateWithoutDonorsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    needPasswordChange?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    admins?: AdminUpdateOneWithoutUserNestedInput
+    donations?: DonationUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutDonorsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    needPasswordChange?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    admins?: AdminUncheckedUpdateOneWithoutUserNestedInput
+    donations?: DonationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type SessionCreateManyUserInput = {
     id: string
     expiresAt: Date | string
@@ -15543,6 +17700,29 @@ export namespace Prisma {
     isAnonymous?: boolean
     campaignId?: string | null
     message?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DonorCreateManyUserInput = {
+    id?: string
+    name: string
+    email: string
+    phone?: string | null
+    image?: string | null
+    address?: string | null
+    city?: string | null
+    district?: string | null
+    country?: string
+    totalDonated?: number
+    donationCount?: number
+    campaignCount?: number
+    lastDonatedAt?: Date | string | null
+    isAnonymous?: boolean
+    receiveUpdates?: boolean
+    receiveReceipt?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -15669,6 +17849,75 @@ export namespace Prisma {
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     campaignId?: NullableStringFieldUpdateOperationsInput | string | null
     message?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DonorUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    district?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: StringFieldUpdateOperationsInput | string
+    totalDonated?: FloatFieldUpdateOperationsInput | number
+    donationCount?: IntFieldUpdateOperationsInput | number
+    campaignCount?: IntFieldUpdateOperationsInput | number
+    lastDonatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    receiveUpdates?: BoolFieldUpdateOperationsInput | boolean
+    receiveReceipt?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DonorUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    district?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: StringFieldUpdateOperationsInput | string
+    totalDonated?: FloatFieldUpdateOperationsInput | number
+    donationCount?: IntFieldUpdateOperationsInput | number
+    campaignCount?: IntFieldUpdateOperationsInput | number
+    lastDonatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    receiveUpdates?: BoolFieldUpdateOperationsInput | boolean
+    receiveReceipt?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DonorUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    district?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: StringFieldUpdateOperationsInput | string
+    totalDonated?: FloatFieldUpdateOperationsInput | number
+    donationCount?: IntFieldUpdateOperationsInput | number
+    campaignCount?: IntFieldUpdateOperationsInput | number
+    lastDonatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    receiveUpdates?: BoolFieldUpdateOperationsInput | boolean
+    receiveReceipt?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

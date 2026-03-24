@@ -222,6 +222,30 @@ exports.Prisma.DonationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.DonorScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  image: 'image',
+  address: 'address',
+  city: 'city',
+  district: 'district',
+  country: 'country',
+  totalDonated: 'totalDonated',
+  donationCount: 'donationCount',
+  campaignCount: 'campaignCount',
+  lastDonatedAt: 'lastDonatedAt',
+  isAnonymous: 'isAnonymous',
+  receiveUpdates: 'receiveUpdates',
+  receiveReceipt: 'receiveReceipt',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.EventScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -351,6 +375,7 @@ exports.Prisma.ModelName = {
   Verification: 'Verification',
   Campaign: 'Campaign',
   Donation: 'Donation',
+  Donor: 'Donor',
   Event: 'Event'
 };
 
