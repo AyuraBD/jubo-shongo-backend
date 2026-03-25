@@ -6,6 +6,8 @@ import { auth } from "./app/lib/auth";
 import cors from "cors";
 import { EnvVars } from "./config/env";
 import cookieParser from "cookie-parser";
+import { notFound } from "./app/middleware/NotFound";
+import { globalErrorHandler } from "./app/middleware/globalErrorHandler";
 
 const app : Application = express()
 
@@ -30,5 +32,9 @@ app.use('/api/v1', IndexRoutes);
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello, TypeScript + Express!');
 });
+
+app.use(notFound);
+app.use(globalErrorHandler);
+
 
 export default app;

@@ -1,6 +1,6 @@
 model Donation {
   id           String        @id @default(uuid())
-  amount       Float
+  amount       Decimal       @db.Decimal(10, 2)
   type         DonationType  @default(CAMPAIGN)
   method       PaymentMethod
   status       PaymentStatus @default(PENDING)

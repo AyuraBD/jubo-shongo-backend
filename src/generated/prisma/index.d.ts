@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 /**
  * Client
@@ -1750,15 +1751,15 @@ export namespace Prisma {
   export type UserCountOutputType = {
     sessions: number
     accounts: number
-    donations: number
     donors: number
+    donations: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
-    donations?: boolean | UserCountOutputTypeCountDonationsArgs
     donors?: boolean | UserCountOutputTypeCountDonorsArgs
+    donations?: boolean | UserCountOutputTypeCountDonationsArgs
   }
 
   // Custom InputTypes
@@ -1789,15 +1790,15 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountDonationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DonationWhereInput
+  export type UserCountOutputTypeCountDonorsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DonorWhereInput
   }
 
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountDonorsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DonorWhereInput
+  export type UserCountOutputTypeCountDonationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DonationWhereInput
   }
 
 
@@ -3174,8 +3175,8 @@ export namespace Prisma {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
     admins?: boolean | User$adminsArgs<ExtArgs>
-    donations?: boolean | User$donationsArgs<ExtArgs>
     donors?: boolean | User$donorsArgs<ExtArgs>
+    donations?: boolean | User$donationsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3229,8 +3230,8 @@ export namespace Prisma {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
     admins?: boolean | User$adminsArgs<ExtArgs>
-    donations?: boolean | User$donationsArgs<ExtArgs>
     donors?: boolean | User$donorsArgs<ExtArgs>
+    donations?: boolean | User$donationsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3242,8 +3243,8 @@ export namespace Prisma {
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       accounts: Prisma.$AccountPayload<ExtArgs>[]
       admins: Prisma.$AdminPayload<ExtArgs> | null
-      donations: Prisma.$DonationPayload<ExtArgs>[]
       donors: Prisma.$DonorPayload<ExtArgs>[]
+      donations: Prisma.$DonationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3655,8 +3656,8 @@ export namespace Prisma {
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     admins<T extends User$adminsArgs<ExtArgs> = {}>(args?: Subset<T, User$adminsArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    donations<T extends User$donationsArgs<ExtArgs> = {}>(args?: Subset<T, User$donationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DonationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     donors<T extends User$donorsArgs<ExtArgs> = {}>(args?: Subset<T, User$donorsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DonorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    donations<T extends User$donationsArgs<ExtArgs> = {}>(args?: Subset<T, User$donationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DonationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4158,30 +4159,6 @@ export namespace Prisma {
   }
 
   /**
-   * User.donations
-   */
-  export type User$donationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Donation
-     */
-    select?: DonationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Donation
-     */
-    omit?: DonationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DonationInclude<ExtArgs> | null
-    where?: DonationWhereInput
-    orderBy?: DonationOrderByWithRelationInput | DonationOrderByWithRelationInput[]
-    cursor?: DonationWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: DonationScalarFieldEnum | DonationScalarFieldEnum[]
-  }
-
-  /**
    * User.donors
    */
   export type User$donorsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4203,6 +4180,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DonorScalarFieldEnum | DonorScalarFieldEnum[]
+  }
+
+  /**
+   * User.donations
+   */
+  export type User$donationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Donation
+     */
+    select?: DonationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Donation
+     */
+    omit?: DonationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonationInclude<ExtArgs> | null
+    where?: DonationWhereInput
+    orderBy?: DonationOrderByWithRelationInput | DonationOrderByWithRelationInput[]
+    cursor?: DonationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DonationScalarFieldEnum | DonationScalarFieldEnum[]
   }
 
   /**
@@ -7522,12 +7523,14 @@ export namespace Prisma {
     goalAmount: number | null
     raisedAmount: number | null
     donorCount: number | null
+    viewCount: number | null
   }
 
   export type CampaignSumAggregateOutputType = {
     goalAmount: number | null
     raisedAmount: number | null
     donorCount: number | null
+    viewCount: number | null
   }
 
   export type CampaignMinAggregateOutputType = {
@@ -7540,6 +7543,7 @@ export namespace Prisma {
     goalAmount: number | null
     raisedAmount: number | null
     donorCount: number | null
+    viewCount: number | null
     coverImage: string | null
     isUrgent: boolean | null
     isFeatured: boolean | null
@@ -7561,6 +7565,7 @@ export namespace Prisma {
     goalAmount: number | null
     raisedAmount: number | null
     donorCount: number | null
+    viewCount: number | null
     coverImage: string | null
     isUrgent: boolean | null
     isFeatured: boolean | null
@@ -7582,6 +7587,7 @@ export namespace Prisma {
     goalAmount: number
     raisedAmount: number
     donorCount: number
+    viewCount: number
     coverImage: number
     isUrgent: number
     isFeatured: number
@@ -7599,12 +7605,14 @@ export namespace Prisma {
     goalAmount?: true
     raisedAmount?: true
     donorCount?: true
+    viewCount?: true
   }
 
   export type CampaignSumAggregateInputType = {
     goalAmount?: true
     raisedAmount?: true
     donorCount?: true
+    viewCount?: true
   }
 
   export type CampaignMinAggregateInputType = {
@@ -7617,6 +7625,7 @@ export namespace Prisma {
     goalAmount?: true
     raisedAmount?: true
     donorCount?: true
+    viewCount?: true
     coverImage?: true
     isUrgent?: true
     isFeatured?: true
@@ -7638,6 +7647,7 @@ export namespace Prisma {
     goalAmount?: true
     raisedAmount?: true
     donorCount?: true
+    viewCount?: true
     coverImage?: true
     isUrgent?: true
     isFeatured?: true
@@ -7659,6 +7669,7 @@ export namespace Prisma {
     goalAmount?: true
     raisedAmount?: true
     donorCount?: true
+    viewCount?: true
     coverImage?: true
     isUrgent?: true
     isFeatured?: true
@@ -7767,6 +7778,7 @@ export namespace Prisma {
     goalAmount: number
     raisedAmount: number
     donorCount: number
+    viewCount: number
     coverImage: string | null
     isUrgent: boolean
     isFeatured: boolean
@@ -7807,6 +7819,7 @@ export namespace Prisma {
     goalAmount?: boolean
     raisedAmount?: boolean
     donorCount?: boolean
+    viewCount?: boolean
     coverImage?: boolean
     isUrgent?: boolean
     isFeatured?: boolean
@@ -7830,6 +7843,7 @@ export namespace Prisma {
     goalAmount?: boolean
     raisedAmount?: boolean
     donorCount?: boolean
+    viewCount?: boolean
     coverImage?: boolean
     isUrgent?: boolean
     isFeatured?: boolean
@@ -7851,6 +7865,7 @@ export namespace Prisma {
     goalAmount?: boolean
     raisedAmount?: boolean
     donorCount?: boolean
+    viewCount?: boolean
     coverImage?: boolean
     isUrgent?: boolean
     isFeatured?: boolean
@@ -7872,6 +7887,7 @@ export namespace Prisma {
     goalAmount?: boolean
     raisedAmount?: boolean
     donorCount?: boolean
+    viewCount?: boolean
     coverImage?: boolean
     isUrgent?: boolean
     isFeatured?: boolean
@@ -7883,7 +7899,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type CampaignOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "longBody" | "category" | "status" | "goalAmount" | "raisedAmount" | "donorCount" | "coverImage" | "isUrgent" | "isFeatured" | "startDate" | "endDate" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["campaign"]>
+  export type CampaignOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "longBody" | "category" | "status" | "goalAmount" | "raisedAmount" | "donorCount" | "viewCount" | "coverImage" | "isUrgent" | "isFeatured" | "startDate" | "endDate" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["campaign"]>
   export type CampaignInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     donations?: boolean | Campaign$donationsArgs<ExtArgs>
     _count?: boolean | CampaignCountOutputTypeDefaultArgs<ExtArgs>
@@ -7906,6 +7922,7 @@ export namespace Prisma {
       goalAmount: number
       raisedAmount: number
       donorCount: number
+      viewCount: number
       coverImage: string | null
       isUrgent: boolean
       isFeatured: boolean
@@ -8348,6 +8365,7 @@ export namespace Prisma {
     readonly goalAmount: FieldRef<"Campaign", 'Float'>
     readonly raisedAmount: FieldRef<"Campaign", 'Float'>
     readonly donorCount: FieldRef<"Campaign", 'Int'>
+    readonly viewCount: FieldRef<"Campaign", 'Int'>
     readonly coverImage: FieldRef<"Campaign", 'String'>
     readonly isUrgent: FieldRef<"Campaign", 'Boolean'>
     readonly isFeatured: FieldRef<"Campaign", 'Boolean'>
@@ -8805,16 +8823,16 @@ export namespace Prisma {
   }
 
   export type DonationAvgAggregateOutputType = {
-    amount: number | null
+    amount: Decimal | null
   }
 
   export type DonationSumAggregateOutputType = {
-    amount: number | null
+    amount: Decimal | null
   }
 
   export type DonationMinAggregateOutputType = {
     id: string | null
-    amount: number | null
+    amount: Decimal | null
     type: $Enums.DonationType | null
     method: $Enums.PaymentMethod | null
     status: $Enums.PaymentStatus | null
@@ -8831,7 +8849,7 @@ export namespace Prisma {
 
   export type DonationMaxAggregateOutputType = {
     id: string | null
-    amount: number | null
+    amount: Decimal | null
     type: $Enums.DonationType | null
     method: $Enums.PaymentMethod | null
     status: $Enums.PaymentStatus | null
@@ -9015,7 +9033,7 @@ export namespace Prisma {
 
   export type DonationGroupByOutputType = {
     id: string
-    amount: number
+    amount: Decimal
     type: $Enums.DonationType
     method: $Enums.PaymentMethod
     status: $Enums.PaymentStatus
@@ -9150,7 +9168,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      amount: number
+      amount: Prisma.Decimal
       type: $Enums.DonationType
       method: $Enums.PaymentMethod
       status: $Enums.PaymentStatus
@@ -9590,7 +9608,7 @@ export namespace Prisma {
    */
   interface DonationFieldRefs {
     readonly id: FieldRef<"Donation", 'String'>
-    readonly amount: FieldRef<"Donation", 'Float'>
+    readonly amount: FieldRef<"Donation", 'Decimal'>
     readonly type: FieldRef<"Donation", 'DonationType'>
     readonly method: FieldRef<"Donation", 'PaymentMethod'>
     readonly status: FieldRef<"Donation", 'PaymentStatus'>
@@ -12646,6 +12664,7 @@ export namespace Prisma {
     goalAmount: 'goalAmount',
     raisedAmount: 'raisedAmount',
     donorCount: 'donorCount',
+    viewCount: 'viewCount',
     coverImage: 'coverImage',
     isUrgent: 'isUrgent',
     isFeatured: 'isFeatured',
@@ -12908,6 +12927,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Decimal'
+   */
+  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+  /**
+   * Reference to a field of type 'Decimal[]'
+   */
+  export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+  /**
    * Reference to a field of type 'DonationType'
    */
   export type EnumDonationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DonationType'>
@@ -13088,8 +13121,8 @@ export namespace Prisma {
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
     admins?: XOR<AdminNullableScalarRelationFilter, AdminWhereInput> | null
-    donations?: DonationListRelationFilter
     donors?: DonorListRelationFilter
+    donations?: DonationListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -13108,8 +13141,8 @@ export namespace Prisma {
     sessions?: SessionOrderByRelationAggregateInput
     accounts?: AccountOrderByRelationAggregateInput
     admins?: AdminOrderByWithRelationInput
-    donations?: DonationOrderByRelationAggregateInput
     donors?: DonorOrderByRelationAggregateInput
+    donations?: DonationOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -13131,8 +13164,8 @@ export namespace Prisma {
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
     admins?: XOR<AdminNullableScalarRelationFilter, AdminWhereInput> | null
-    donations?: DonationListRelationFilter
     donors?: DonorListRelationFilter
+    donations?: DonationListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -13406,6 +13439,7 @@ export namespace Prisma {
     goalAmount?: FloatFilter<"Campaign"> | number
     raisedAmount?: FloatFilter<"Campaign"> | number
     donorCount?: IntFilter<"Campaign"> | number
+    viewCount?: IntFilter<"Campaign"> | number
     coverImage?: StringNullableFilter<"Campaign"> | string | null
     isUrgent?: BoolFilter<"Campaign"> | boolean
     isFeatured?: BoolFilter<"Campaign"> | boolean
@@ -13428,6 +13462,7 @@ export namespace Prisma {
     goalAmount?: SortOrder
     raisedAmount?: SortOrder
     donorCount?: SortOrder
+    viewCount?: SortOrder
     coverImage?: SortOrderInput | SortOrder
     isUrgent?: SortOrder
     isFeatured?: SortOrder
@@ -13453,6 +13488,7 @@ export namespace Prisma {
     goalAmount?: FloatFilter<"Campaign"> | number
     raisedAmount?: FloatFilter<"Campaign"> | number
     donorCount?: IntFilter<"Campaign"> | number
+    viewCount?: IntFilter<"Campaign"> | number
     coverImage?: StringNullableFilter<"Campaign"> | string | null
     isUrgent?: BoolFilter<"Campaign"> | boolean
     isFeatured?: BoolFilter<"Campaign"> | boolean
@@ -13475,6 +13511,7 @@ export namespace Prisma {
     goalAmount?: SortOrder
     raisedAmount?: SortOrder
     donorCount?: SortOrder
+    viewCount?: SortOrder
     coverImage?: SortOrderInput | SortOrder
     isUrgent?: SortOrder
     isFeatured?: SortOrder
@@ -13504,6 +13541,7 @@ export namespace Prisma {
     goalAmount?: FloatWithAggregatesFilter<"Campaign"> | number
     raisedAmount?: FloatWithAggregatesFilter<"Campaign"> | number
     donorCount?: IntWithAggregatesFilter<"Campaign"> | number
+    viewCount?: IntWithAggregatesFilter<"Campaign"> | number
     coverImage?: StringNullableWithAggregatesFilter<"Campaign"> | string | null
     isUrgent?: BoolWithAggregatesFilter<"Campaign"> | boolean
     isFeatured?: BoolWithAggregatesFilter<"Campaign"> | boolean
@@ -13520,7 +13558,7 @@ export namespace Prisma {
     OR?: DonationWhereInput[]
     NOT?: DonationWhereInput | DonationWhereInput[]
     id?: StringFilter<"Donation"> | string
-    amount?: FloatFilter<"Donation"> | number
+    amount?: DecimalFilter<"Donation"> | Decimal | DecimalJsLike | number | string
     type?: EnumDonationTypeFilter<"Donation"> | $Enums.DonationType
     method?: EnumPaymentMethodFilter<"Donation"> | $Enums.PaymentMethod
     status?: EnumPaymentStatusFilter<"Donation"> | $Enums.PaymentStatus
@@ -13563,7 +13601,7 @@ export namespace Prisma {
     AND?: DonationWhereInput | DonationWhereInput[]
     OR?: DonationWhereInput[]
     NOT?: DonationWhereInput | DonationWhereInput[]
-    amount?: FloatFilter<"Donation"> | number
+    amount?: DecimalFilter<"Donation"> | Decimal | DecimalJsLike | number | string
     type?: EnumDonationTypeFilter<"Donation"> | $Enums.DonationType
     method?: EnumPaymentMethodFilter<"Donation"> | $Enums.PaymentMethod
     status?: EnumPaymentStatusFilter<"Donation"> | $Enums.PaymentStatus
@@ -13609,7 +13647,7 @@ export namespace Prisma {
     OR?: DonationScalarWhereWithAggregatesInput[]
     NOT?: DonationScalarWhereWithAggregatesInput | DonationScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Donation"> | string
-    amount?: FloatWithAggregatesFilter<"Donation"> | number
+    amount?: DecimalWithAggregatesFilter<"Donation"> | Decimal | DecimalJsLike | number | string
     type?: EnumDonationTypeWithAggregatesFilter<"Donation"> | $Enums.DonationType
     method?: EnumPaymentMethodWithAggregatesFilter<"Donation"> | $Enums.PaymentMethod
     status?: EnumPaymentStatusWithAggregatesFilter<"Donation"> | $Enums.PaymentStatus
@@ -13681,11 +13719,11 @@ export namespace Prisma {
   export type DonorWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     userId?: string
-    email?: string
     AND?: DonorWhereInput | DonorWhereInput[]
     OR?: DonorWhereInput[]
     NOT?: DonorWhereInput | DonorWhereInput[]
     name?: StringFilter<"Donor"> | string
+    email?: StringFilter<"Donor"> | string
     phone?: StringNullableFilter<"Donor"> | string | null
     image?: StringNullableFilter<"Donor"> | string | null
     address?: StringNullableFilter<"Donor"> | string | null
@@ -13704,7 +13742,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Donor"> | Date | string
     updatedAt?: DateTimeFilter<"Donor"> | Date | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-  }, "id" | "userId" | "email">
+  }, "id" | "userId">
 
   export type DonorOrderByWithAggregationInput = {
     id?: SortOrder
@@ -13960,8 +13998,8 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     admins?: AdminCreateNestedOneWithoutUserInput
-    donations?: DonationCreateNestedManyWithoutUserInput
     donors?: DonorCreateNestedManyWithoutUserInput
+    donations?: DonationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -13980,8 +14018,8 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     admins?: AdminUncheckedCreateNestedOneWithoutUserInput
-    donations?: DonationUncheckedCreateNestedManyWithoutUserInput
     donors?: DonorUncheckedCreateNestedManyWithoutUserInput
+    donations?: DonationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -14000,8 +14038,8 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     admins?: AdminUpdateOneWithoutUserNestedInput
-    donations?: DonationUpdateManyWithoutUserNestedInput
     donors?: DonorUpdateManyWithoutUserNestedInput
+    donations?: DonationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -14020,8 +14058,8 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     admins?: AdminUncheckedUpdateOneWithoutUserNestedInput
-    donations?: DonationUncheckedUpdateManyWithoutUserNestedInput
     donors?: DonorUncheckedUpdateManyWithoutUserNestedInput
+    donations?: DonationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -14070,7 +14108,7 @@ export namespace Prisma {
   }
 
   export type SessionCreateInput = {
-    id: string
+    id?: string
     expiresAt: Date | string
     token: string
     createdAt?: Date | string
@@ -14081,7 +14119,7 @@ export namespace Prisma {
   }
 
   export type SessionUncheckedCreateInput = {
-    id: string
+    id?: string
     expiresAt: Date | string
     token: string
     createdAt?: Date | string
@@ -14114,7 +14152,7 @@ export namespace Prisma {
   }
 
   export type SessionCreateManyInput = {
-    id: string
+    id?: string
     expiresAt: Date | string
     token: string
     createdAt?: Date | string
@@ -14146,7 +14184,7 @@ export namespace Prisma {
   }
 
   export type AccountCreateInput = {
-    id: string
+    id?: string
     accountId: string
     providerId: string
     accessToken?: string | null
@@ -14162,7 +14200,7 @@ export namespace Prisma {
   }
 
   export type AccountUncheckedCreateInput = {
-    id: string
+    id?: string
     accountId: string
     providerId: string
     userId: string
@@ -14210,7 +14248,7 @@ export namespace Prisma {
   }
 
   export type AccountCreateManyInput = {
-    id: string
+    id?: string
     accountId: string
     providerId: string
     userId: string
@@ -14257,7 +14295,7 @@ export namespace Prisma {
   }
 
   export type VerificationCreateInput = {
-    id: string
+    id?: string
     identifier: string
     value: string
     expiresAt: Date | string
@@ -14266,7 +14304,7 @@ export namespace Prisma {
   }
 
   export type VerificationUncheckedCreateInput = {
-    id: string
+    id?: string
     identifier: string
     value: string
     expiresAt: Date | string
@@ -14293,7 +14331,7 @@ export namespace Prisma {
   }
 
   export type VerificationCreateManyInput = {
-    id: string
+    id?: string
     identifier: string
     value: string
     expiresAt: Date | string
@@ -14329,6 +14367,7 @@ export namespace Prisma {
     goalAmount: number
     raisedAmount?: number
     donorCount?: number
+    viewCount?: number
     coverImage?: string | null
     isUrgent?: boolean
     isFeatured?: boolean
@@ -14351,6 +14390,7 @@ export namespace Prisma {
     goalAmount: number
     raisedAmount?: number
     donorCount?: number
+    viewCount?: number
     coverImage?: string | null
     isUrgent?: boolean
     isFeatured?: boolean
@@ -14373,6 +14413,7 @@ export namespace Prisma {
     goalAmount?: FloatFieldUpdateOperationsInput | number
     raisedAmount?: FloatFieldUpdateOperationsInput | number
     donorCount?: IntFieldUpdateOperationsInput | number
+    viewCount?: IntFieldUpdateOperationsInput | number
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     isUrgent?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
@@ -14395,6 +14436,7 @@ export namespace Prisma {
     goalAmount?: FloatFieldUpdateOperationsInput | number
     raisedAmount?: FloatFieldUpdateOperationsInput | number
     donorCount?: IntFieldUpdateOperationsInput | number
+    viewCount?: IntFieldUpdateOperationsInput | number
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     isUrgent?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
@@ -14417,6 +14459,7 @@ export namespace Prisma {
     goalAmount: number
     raisedAmount?: number
     donorCount?: number
+    viewCount?: number
     coverImage?: string | null
     isUrgent?: boolean
     isFeatured?: boolean
@@ -14438,6 +14481,7 @@ export namespace Prisma {
     goalAmount?: FloatFieldUpdateOperationsInput | number
     raisedAmount?: FloatFieldUpdateOperationsInput | number
     donorCount?: IntFieldUpdateOperationsInput | number
+    viewCount?: IntFieldUpdateOperationsInput | number
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     isUrgent?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
@@ -14459,6 +14503,7 @@ export namespace Prisma {
     goalAmount?: FloatFieldUpdateOperationsInput | number
     raisedAmount?: FloatFieldUpdateOperationsInput | number
     donorCount?: IntFieldUpdateOperationsInput | number
+    viewCount?: IntFieldUpdateOperationsInput | number
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     isUrgent?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
@@ -14472,7 +14517,7 @@ export namespace Prisma {
 
   export type DonationCreateInput = {
     id?: string
-    amount: number
+    amount: Decimal | DecimalJsLike | number | string
     type?: $Enums.DonationType
     method: $Enums.PaymentMethod
     status?: $Enums.PaymentStatus
@@ -14490,7 +14535,7 @@ export namespace Prisma {
 
   export type DonationUncheckedCreateInput = {
     id?: string
-    amount: number
+    amount: Decimal | DecimalJsLike | number | string
     type?: $Enums.DonationType
     method: $Enums.PaymentMethod
     status?: $Enums.PaymentStatus
@@ -14508,7 +14553,7 @@ export namespace Prisma {
 
   export type DonationUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: FloatFieldUpdateOperationsInput | number
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: EnumDonationTypeFieldUpdateOperationsInput | $Enums.DonationType
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
@@ -14526,7 +14571,7 @@ export namespace Prisma {
 
   export type DonationUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: FloatFieldUpdateOperationsInput | number
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: EnumDonationTypeFieldUpdateOperationsInput | $Enums.DonationType
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
@@ -14544,7 +14589,7 @@ export namespace Prisma {
 
   export type DonationCreateManyInput = {
     id?: string
-    amount: number
+    amount: Decimal | DecimalJsLike | number | string
     type?: $Enums.DonationType
     method: $Enums.PaymentMethod
     status?: $Enums.PaymentStatus
@@ -14562,7 +14607,7 @@ export namespace Prisma {
 
   export type DonationUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: FloatFieldUpdateOperationsInput | number
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: EnumDonationTypeFieldUpdateOperationsInput | $Enums.DonationType
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
@@ -14578,7 +14623,7 @@ export namespace Prisma {
 
   export type DonationUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: FloatFieldUpdateOperationsInput | number
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: EnumDonationTypeFieldUpdateOperationsInput | $Enums.DonationType
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
@@ -15085,16 +15130,16 @@ export namespace Prisma {
     isNot?: AdminWhereInput | null
   }
 
-  export type DonationListRelationFilter = {
-    every?: DonationWhereInput
-    some?: DonationWhereInput
-    none?: DonationWhereInput
-  }
-
   export type DonorListRelationFilter = {
     every?: DonorWhereInput
     some?: DonorWhereInput
     none?: DonorWhereInput
+  }
+
+  export type DonationListRelationFilter = {
+    every?: DonationWhereInput
+    some?: DonationWhereInput
+    none?: DonationWhereInput
   }
 
   export type SessionOrderByRelationAggregateInput = {
@@ -15105,11 +15150,11 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type DonationOrderByRelationAggregateInput = {
+  export type DonorOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type DonorOrderByRelationAggregateInput = {
+  export type DonationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -15350,6 +15395,7 @@ export namespace Prisma {
     goalAmount?: SortOrder
     raisedAmount?: SortOrder
     donorCount?: SortOrder
+    viewCount?: SortOrder
     coverImage?: SortOrder
     isUrgent?: SortOrder
     isFeatured?: SortOrder
@@ -15365,6 +15411,7 @@ export namespace Prisma {
     goalAmount?: SortOrder
     raisedAmount?: SortOrder
     donorCount?: SortOrder
+    viewCount?: SortOrder
   }
 
   export type CampaignMaxOrderByAggregateInput = {
@@ -15377,6 +15424,7 @@ export namespace Prisma {
     goalAmount?: SortOrder
     raisedAmount?: SortOrder
     donorCount?: SortOrder
+    viewCount?: SortOrder
     coverImage?: SortOrder
     isUrgent?: SortOrder
     isFeatured?: SortOrder
@@ -15398,6 +15446,7 @@ export namespace Prisma {
     goalAmount?: SortOrder
     raisedAmount?: SortOrder
     donorCount?: SortOrder
+    viewCount?: SortOrder
     coverImage?: SortOrder
     isUrgent?: SortOrder
     isFeatured?: SortOrder
@@ -15413,6 +15462,7 @@ export namespace Prisma {
     goalAmount?: SortOrder
     raisedAmount?: SortOrder
     donorCount?: SortOrder
+    viewCount?: SortOrder
   }
 
   export type EnumCampaignCategoryWithAggregatesFilter<$PrismaModel = never> = {
@@ -15465,6 +15515,17 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type DecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
   }
 
   export type EnumDonationTypeFilter<$PrismaModel = never> = {
@@ -15579,6 +15640,22 @@ export namespace Prisma {
 
   export type DonationSumOrderByAggregateInput = {
     amount?: SortOrder
+  }
+
+  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type EnumDonationTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -15895,18 +15972,18 @@ export namespace Prisma {
     connect?: AdminWhereUniqueInput
   }
 
-  export type DonationCreateNestedManyWithoutUserInput = {
-    create?: XOR<DonationCreateWithoutUserInput, DonationUncheckedCreateWithoutUserInput> | DonationCreateWithoutUserInput[] | DonationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: DonationCreateOrConnectWithoutUserInput | DonationCreateOrConnectWithoutUserInput[]
-    createMany?: DonationCreateManyUserInputEnvelope
-    connect?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
-  }
-
   export type DonorCreateNestedManyWithoutUserInput = {
     create?: XOR<DonorCreateWithoutUserInput, DonorUncheckedCreateWithoutUserInput> | DonorCreateWithoutUserInput[] | DonorUncheckedCreateWithoutUserInput[]
     connectOrCreate?: DonorCreateOrConnectWithoutUserInput | DonorCreateOrConnectWithoutUserInput[]
     createMany?: DonorCreateManyUserInputEnvelope
     connect?: DonorWhereUniqueInput | DonorWhereUniqueInput[]
+  }
+
+  export type DonationCreateNestedManyWithoutUserInput = {
+    create?: XOR<DonationCreateWithoutUserInput, DonationUncheckedCreateWithoutUserInput> | DonationCreateWithoutUserInput[] | DonationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DonationCreateOrConnectWithoutUserInput | DonationCreateOrConnectWithoutUserInput[]
+    createMany?: DonationCreateManyUserInputEnvelope
+    connect?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
   }
 
   export type SessionUncheckedCreateNestedManyWithoutUserInput = {
@@ -15929,18 +16006,18 @@ export namespace Prisma {
     connect?: AdminWhereUniqueInput
   }
 
-  export type DonationUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<DonationCreateWithoutUserInput, DonationUncheckedCreateWithoutUserInput> | DonationCreateWithoutUserInput[] | DonationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: DonationCreateOrConnectWithoutUserInput | DonationCreateOrConnectWithoutUserInput[]
-    createMany?: DonationCreateManyUserInputEnvelope
-    connect?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
-  }
-
   export type DonorUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<DonorCreateWithoutUserInput, DonorUncheckedCreateWithoutUserInput> | DonorCreateWithoutUserInput[] | DonorUncheckedCreateWithoutUserInput[]
     connectOrCreate?: DonorCreateOrConnectWithoutUserInput | DonorCreateOrConnectWithoutUserInput[]
     createMany?: DonorCreateManyUserInputEnvelope
     connect?: DonorWhereUniqueInput | DonorWhereUniqueInput[]
+  }
+
+  export type DonationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<DonationCreateWithoutUserInput, DonationUncheckedCreateWithoutUserInput> | DonationCreateWithoutUserInput[] | DonationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DonationCreateOrConnectWithoutUserInput | DonationCreateOrConnectWithoutUserInput[]
+    createMany?: DonationCreateManyUserInputEnvelope
+    connect?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
   }
 
   export type EnumRoleFieldUpdateOperationsInput = {
@@ -15993,20 +16070,6 @@ export namespace Prisma {
     update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutUserInput, AdminUpdateWithoutUserInput>, AdminUncheckedUpdateWithoutUserInput>
   }
 
-  export type DonationUpdateManyWithoutUserNestedInput = {
-    create?: XOR<DonationCreateWithoutUserInput, DonationUncheckedCreateWithoutUserInput> | DonationCreateWithoutUserInput[] | DonationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: DonationCreateOrConnectWithoutUserInput | DonationCreateOrConnectWithoutUserInput[]
-    upsert?: DonationUpsertWithWhereUniqueWithoutUserInput | DonationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: DonationCreateManyUserInputEnvelope
-    set?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
-    disconnect?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
-    delete?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
-    connect?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
-    update?: DonationUpdateWithWhereUniqueWithoutUserInput | DonationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: DonationUpdateManyWithWhereWithoutUserInput | DonationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: DonationScalarWhereInput | DonationScalarWhereInput[]
-  }
-
   export type DonorUpdateManyWithoutUserNestedInput = {
     create?: XOR<DonorCreateWithoutUserInput, DonorUncheckedCreateWithoutUserInput> | DonorCreateWithoutUserInput[] | DonorUncheckedCreateWithoutUserInput[]
     connectOrCreate?: DonorCreateOrConnectWithoutUserInput | DonorCreateOrConnectWithoutUserInput[]
@@ -16019,6 +16082,20 @@ export namespace Prisma {
     update?: DonorUpdateWithWhereUniqueWithoutUserInput | DonorUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: DonorUpdateManyWithWhereWithoutUserInput | DonorUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: DonorScalarWhereInput | DonorScalarWhereInput[]
+  }
+
+  export type DonationUpdateManyWithoutUserNestedInput = {
+    create?: XOR<DonationCreateWithoutUserInput, DonationUncheckedCreateWithoutUserInput> | DonationCreateWithoutUserInput[] | DonationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DonationCreateOrConnectWithoutUserInput | DonationCreateOrConnectWithoutUserInput[]
+    upsert?: DonationUpsertWithWhereUniqueWithoutUserInput | DonationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: DonationCreateManyUserInputEnvelope
+    set?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
+    disconnect?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
+    delete?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
+    connect?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
+    update?: DonationUpdateWithWhereUniqueWithoutUserInput | DonationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: DonationUpdateManyWithWhereWithoutUserInput | DonationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: DonationScalarWhereInput | DonationScalarWhereInput[]
   }
 
   export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
@@ -16059,20 +16136,6 @@ export namespace Prisma {
     update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutUserInput, AdminUpdateWithoutUserInput>, AdminUncheckedUpdateWithoutUserInput>
   }
 
-  export type DonationUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<DonationCreateWithoutUserInput, DonationUncheckedCreateWithoutUserInput> | DonationCreateWithoutUserInput[] | DonationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: DonationCreateOrConnectWithoutUserInput | DonationCreateOrConnectWithoutUserInput[]
-    upsert?: DonationUpsertWithWhereUniqueWithoutUserInput | DonationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: DonationCreateManyUserInputEnvelope
-    set?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
-    disconnect?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
-    delete?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
-    connect?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
-    update?: DonationUpdateWithWhereUniqueWithoutUserInput | DonationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: DonationUpdateManyWithWhereWithoutUserInput | DonationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: DonationScalarWhereInput | DonationScalarWhereInput[]
-  }
-
   export type DonorUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<DonorCreateWithoutUserInput, DonorUncheckedCreateWithoutUserInput> | DonorCreateWithoutUserInput[] | DonorUncheckedCreateWithoutUserInput[]
     connectOrCreate?: DonorCreateOrConnectWithoutUserInput | DonorCreateOrConnectWithoutUserInput[]
@@ -16085,6 +16148,20 @@ export namespace Prisma {
     update?: DonorUpdateWithWhereUniqueWithoutUserInput | DonorUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: DonorUpdateManyWithWhereWithoutUserInput | DonorUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: DonorScalarWhereInput | DonorScalarWhereInput[]
+  }
+
+  export type DonationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<DonationCreateWithoutUserInput, DonationUncheckedCreateWithoutUserInput> | DonationCreateWithoutUserInput[] | DonationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DonationCreateOrConnectWithoutUserInput | DonationCreateOrConnectWithoutUserInput[]
+    upsert?: DonationUpsertWithWhereUniqueWithoutUserInput | DonationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: DonationCreateManyUserInputEnvelope
+    set?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
+    disconnect?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
+    delete?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
+    connect?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
+    update?: DonationUpdateWithWhereUniqueWithoutUserInput | DonationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: DonationUpdateManyWithWhereWithoutUserInput | DonationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: DonationScalarWhereInput | DonationScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutSessionsInput = {
@@ -16191,6 +16268,14 @@ export namespace Prisma {
     create?: XOR<CampaignCreateWithoutDonationsInput, CampaignUncheckedCreateWithoutDonationsInput>
     connectOrCreate?: CampaignCreateOrConnectWithoutDonationsInput
     connect?: CampaignWhereUniqueInput
+  }
+
+  export type DecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
   }
 
   export type EnumDonationTypeFieldUpdateOperationsInput = {
@@ -16532,6 +16617,17 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type NestedDecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
   export type NestedEnumDonationTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.DonationType | EnumDonationTypeFieldRefInput<$PrismaModel>
     in?: $Enums.DonationType[] | ListEnumDonationTypeFieldRefInput<$PrismaModel>
@@ -16551,6 +16647,22 @@ export namespace Prisma {
     in?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumPaymentStatusFilter<$PrismaModel> | $Enums.PaymentStatus
+  }
+
+  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type NestedEnumDonationTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -16682,8 +16794,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
-    donations?: DonationCreateNestedManyWithoutUserInput
     donors?: DonorCreateNestedManyWithoutUserInput
+    donations?: DonationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAdminsInput = {
@@ -16701,8 +16813,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    donations?: DonationUncheckedCreateNestedManyWithoutUserInput
     donors?: DonorUncheckedCreateNestedManyWithoutUserInput
+    donations?: DonationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAdminsInput = {
@@ -16736,8 +16848,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    donations?: DonationUpdateManyWithoutUserNestedInput
     donors?: DonorUpdateManyWithoutUserNestedInput
+    donations?: DonationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAdminsInput = {
@@ -16755,12 +16867,12 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    donations?: DonationUncheckedUpdateManyWithoutUserNestedInput
     donors?: DonorUncheckedUpdateManyWithoutUserNestedInput
+    donations?: DonationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type SessionCreateWithoutUserInput = {
-    id: string
+    id?: string
     expiresAt: Date | string
     token: string
     createdAt?: Date | string
@@ -16770,7 +16882,7 @@ export namespace Prisma {
   }
 
   export type SessionUncheckedCreateWithoutUserInput = {
-    id: string
+    id?: string
     expiresAt: Date | string
     token: string
     createdAt?: Date | string
@@ -16790,7 +16902,7 @@ export namespace Prisma {
   }
 
   export type AccountCreateWithoutUserInput = {
-    id: string
+    id?: string
     accountId: string
     providerId: string
     accessToken?: string | null
@@ -16805,7 +16917,7 @@ export namespace Prisma {
   }
 
   export type AccountUncheckedCreateWithoutUserInput = {
-    id: string
+    id?: string
     accountId: string
     providerId: string
     accessToken?: string | null
@@ -16854,50 +16966,6 @@ export namespace Prisma {
   export type AdminCreateOrConnectWithoutUserInput = {
     where: AdminWhereUniqueInput
     create: XOR<AdminCreateWithoutUserInput, AdminUncheckedCreateWithoutUserInput>
-  }
-
-  export type DonationCreateWithoutUserInput = {
-    id?: string
-    amount: number
-    type?: $Enums.DonationType
-    method: $Enums.PaymentMethod
-    status?: $Enums.PaymentStatus
-    paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
-    donorName?: string | null
-    donorEmail?: string | null
-    donorPhone?: string | null
-    isAnonymous?: boolean
-    message?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    campaign?: CampaignCreateNestedOneWithoutDonationsInput
-  }
-
-  export type DonationUncheckedCreateWithoutUserInput = {
-    id?: string
-    amount: number
-    type?: $Enums.DonationType
-    method: $Enums.PaymentMethod
-    status?: $Enums.PaymentStatus
-    paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
-    donorName?: string | null
-    donorEmail?: string | null
-    donorPhone?: string | null
-    isAnonymous?: boolean
-    campaignId?: string | null
-    message?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type DonationCreateOrConnectWithoutUserInput = {
-    where: DonationWhereUniqueInput
-    create: XOR<DonationCreateWithoutUserInput, DonationUncheckedCreateWithoutUserInput>
-  }
-
-  export type DonationCreateManyUserInputEnvelope = {
-    data: DonationCreateManyUserInput | DonationCreateManyUserInput[]
-    skipDuplicates?: boolean
   }
 
   export type DonorCreateWithoutUserInput = {
@@ -16953,6 +17021,50 @@ export namespace Prisma {
 
   export type DonorCreateManyUserInputEnvelope = {
     data: DonorCreateManyUserInput | DonorCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DonationCreateWithoutUserInput = {
+    id?: string
+    amount: Decimal | DecimalJsLike | number | string
+    type?: $Enums.DonationType
+    method: $Enums.PaymentMethod
+    status?: $Enums.PaymentStatus
+    paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    donorName?: string | null
+    donorEmail?: string | null
+    donorPhone?: string | null
+    isAnonymous?: boolean
+    message?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaign?: CampaignCreateNestedOneWithoutDonationsInput
+  }
+
+  export type DonationUncheckedCreateWithoutUserInput = {
+    id?: string
+    amount: Decimal | DecimalJsLike | number | string
+    type?: $Enums.DonationType
+    method: $Enums.PaymentMethod
+    status?: $Enums.PaymentStatus
+    paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    donorName?: string | null
+    donorEmail?: string | null
+    donorPhone?: string | null
+    isAnonymous?: boolean
+    campaignId?: string | null
+    message?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DonationCreateOrConnectWithoutUserInput = {
+    where: DonationWhereUniqueInput
+    create: XOR<DonationCreateWithoutUserInput, DonationUncheckedCreateWithoutUserInput>
+  }
+
+  export type DonationCreateManyUserInputEnvelope = {
+    data: DonationCreateManyUserInput | DonationCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -17054,43 +17166,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type DonationUpsertWithWhereUniqueWithoutUserInput = {
-    where: DonationWhereUniqueInput
-    update: XOR<DonationUpdateWithoutUserInput, DonationUncheckedUpdateWithoutUserInput>
-    create: XOR<DonationCreateWithoutUserInput, DonationUncheckedCreateWithoutUserInput>
-  }
-
-  export type DonationUpdateWithWhereUniqueWithoutUserInput = {
-    where: DonationWhereUniqueInput
-    data: XOR<DonationUpdateWithoutUserInput, DonationUncheckedUpdateWithoutUserInput>
-  }
-
-  export type DonationUpdateManyWithWhereWithoutUserInput = {
-    where: DonationScalarWhereInput
-    data: XOR<DonationUpdateManyMutationInput, DonationUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type DonationScalarWhereInput = {
-    AND?: DonationScalarWhereInput | DonationScalarWhereInput[]
-    OR?: DonationScalarWhereInput[]
-    NOT?: DonationScalarWhereInput | DonationScalarWhereInput[]
-    id?: StringFilter<"Donation"> | string
-    amount?: FloatFilter<"Donation"> | number
-    type?: EnumDonationTypeFilter<"Donation"> | $Enums.DonationType
-    method?: EnumPaymentMethodFilter<"Donation"> | $Enums.PaymentMethod
-    status?: EnumPaymentStatusFilter<"Donation"> | $Enums.PaymentStatus
-    paymentGatewayData?: JsonNullableFilter<"Donation">
-    userId?: StringNullableFilter<"Donation"> | string | null
-    donorName?: StringNullableFilter<"Donation"> | string | null
-    donorEmail?: StringNullableFilter<"Donation"> | string | null
-    donorPhone?: StringNullableFilter<"Donation"> | string | null
-    isAnonymous?: BoolFilter<"Donation"> | boolean
-    campaignId?: StringNullableFilter<"Donation"> | string | null
-    message?: StringNullableFilter<"Donation"> | string | null
-    createdAt?: DateTimeFilter<"Donation"> | Date | string
-    updatedAt?: DateTimeFilter<"Donation"> | Date | string
-  }
-
   export type DonorUpsertWithWhereUniqueWithoutUserInput = {
     where: DonorWhereUniqueInput
     update: XOR<DonorUpdateWithoutUserInput, DonorUncheckedUpdateWithoutUserInput>
@@ -17134,6 +17209,43 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Donor"> | Date | string
   }
 
+  export type DonationUpsertWithWhereUniqueWithoutUserInput = {
+    where: DonationWhereUniqueInput
+    update: XOR<DonationUpdateWithoutUserInput, DonationUncheckedUpdateWithoutUserInput>
+    create: XOR<DonationCreateWithoutUserInput, DonationUncheckedCreateWithoutUserInput>
+  }
+
+  export type DonationUpdateWithWhereUniqueWithoutUserInput = {
+    where: DonationWhereUniqueInput
+    data: XOR<DonationUpdateWithoutUserInput, DonationUncheckedUpdateWithoutUserInput>
+  }
+
+  export type DonationUpdateManyWithWhereWithoutUserInput = {
+    where: DonationScalarWhereInput
+    data: XOR<DonationUpdateManyMutationInput, DonationUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type DonationScalarWhereInput = {
+    AND?: DonationScalarWhereInput | DonationScalarWhereInput[]
+    OR?: DonationScalarWhereInput[]
+    NOT?: DonationScalarWhereInput | DonationScalarWhereInput[]
+    id?: StringFilter<"Donation"> | string
+    amount?: DecimalFilter<"Donation"> | Decimal | DecimalJsLike | number | string
+    type?: EnumDonationTypeFilter<"Donation"> | $Enums.DonationType
+    method?: EnumPaymentMethodFilter<"Donation"> | $Enums.PaymentMethod
+    status?: EnumPaymentStatusFilter<"Donation"> | $Enums.PaymentStatus
+    paymentGatewayData?: JsonNullableFilter<"Donation">
+    userId?: StringNullableFilter<"Donation"> | string | null
+    donorName?: StringNullableFilter<"Donation"> | string | null
+    donorEmail?: StringNullableFilter<"Donation"> | string | null
+    donorPhone?: StringNullableFilter<"Donation"> | string | null
+    isAnonymous?: BoolFilter<"Donation"> | boolean
+    campaignId?: StringNullableFilter<"Donation"> | string | null
+    message?: StringNullableFilter<"Donation"> | string | null
+    createdAt?: DateTimeFilter<"Donation"> | Date | string
+    updatedAt?: DateTimeFilter<"Donation"> | Date | string
+  }
+
   export type UserCreateWithoutSessionsInput = {
     id?: string
     name: string
@@ -17149,8 +17261,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     admins?: AdminCreateNestedOneWithoutUserInput
-    donations?: DonationCreateNestedManyWithoutUserInput
     donors?: DonorCreateNestedManyWithoutUserInput
+    donations?: DonationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -17168,8 +17280,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     admins?: AdminUncheckedCreateNestedOneWithoutUserInput
-    donations?: DonationUncheckedCreateNestedManyWithoutUserInput
     donors?: DonorUncheckedCreateNestedManyWithoutUserInput
+    donations?: DonationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -17203,8 +17315,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     admins?: AdminUpdateOneWithoutUserNestedInput
-    donations?: DonationUpdateManyWithoutUserNestedInput
     donors?: DonorUpdateManyWithoutUserNestedInput
+    donations?: DonationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -17222,8 +17334,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     admins?: AdminUncheckedUpdateOneWithoutUserNestedInput
-    donations?: DonationUncheckedUpdateManyWithoutUserNestedInput
     donors?: DonorUncheckedUpdateManyWithoutUserNestedInput
+    donations?: DonationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -17241,8 +17353,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
     admins?: AdminCreateNestedOneWithoutUserInput
-    donations?: DonationCreateNestedManyWithoutUserInput
     donors?: DonorCreateNestedManyWithoutUserInput
+    donations?: DonationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -17260,8 +17372,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     admins?: AdminUncheckedCreateNestedOneWithoutUserInput
-    donations?: DonationUncheckedCreateNestedManyWithoutUserInput
     donors?: DonorUncheckedCreateNestedManyWithoutUserInput
+    donations?: DonationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -17295,8 +17407,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
     admins?: AdminUpdateOneWithoutUserNestedInput
-    donations?: DonationUpdateManyWithoutUserNestedInput
     donors?: DonorUpdateManyWithoutUserNestedInput
+    donations?: DonationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -17314,13 +17426,13 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     admins?: AdminUncheckedUpdateOneWithoutUserNestedInput
-    donations?: DonationUncheckedUpdateManyWithoutUserNestedInput
     donors?: DonorUncheckedUpdateManyWithoutUserNestedInput
+    donations?: DonationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type DonationCreateWithoutCampaignInput = {
     id?: string
-    amount: number
+    amount: Decimal | DecimalJsLike | number | string
     type?: $Enums.DonationType
     method: $Enums.PaymentMethod
     status?: $Enums.PaymentStatus
@@ -17337,7 +17449,7 @@ export namespace Prisma {
 
   export type DonationUncheckedCreateWithoutCampaignInput = {
     id?: string
-    amount: number
+    amount: Decimal | DecimalJsLike | number | string
     type?: $Enums.DonationType
     method: $Enums.PaymentMethod
     status?: $Enums.PaymentStatus
@@ -17431,6 +17543,7 @@ export namespace Prisma {
     goalAmount: number
     raisedAmount?: number
     donorCount?: number
+    viewCount?: number
     coverImage?: string | null
     isUrgent?: boolean
     isFeatured?: boolean
@@ -17452,6 +17565,7 @@ export namespace Prisma {
     goalAmount: number
     raisedAmount?: number
     donorCount?: number
+    viewCount?: number
     coverImage?: string | null
     isUrgent?: boolean
     isFeatured?: boolean
@@ -17538,6 +17652,7 @@ export namespace Prisma {
     goalAmount?: FloatFieldUpdateOperationsInput | number
     raisedAmount?: FloatFieldUpdateOperationsInput | number
     donorCount?: IntFieldUpdateOperationsInput | number
+    viewCount?: IntFieldUpdateOperationsInput | number
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     isUrgent?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
@@ -17559,6 +17674,7 @@ export namespace Prisma {
     goalAmount?: FloatFieldUpdateOperationsInput | number
     raisedAmount?: FloatFieldUpdateOperationsInput | number
     donorCount?: IntFieldUpdateOperationsInput | number
+    viewCount?: IntFieldUpdateOperationsInput | number
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     isUrgent?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
@@ -17663,7 +17779,7 @@ export namespace Prisma {
   }
 
   export type SessionCreateManyUserInput = {
-    id: string
+    id?: string
     expiresAt: Date | string
     token: string
     createdAt?: Date | string
@@ -17673,7 +17789,7 @@ export namespace Prisma {
   }
 
   export type AccountCreateManyUserInput = {
-    id: string
+    id?: string
     accountId: string
     providerId: string
     accessToken?: string | null
@@ -17683,23 +17799,6 @@ export namespace Prisma {
     refreshTokenExpiresAt?: Date | string | null
     scope?: string | null
     password?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type DonationCreateManyUserInput = {
-    id?: string
-    amount: number
-    type?: $Enums.DonationType
-    method: $Enums.PaymentMethod
-    status?: $Enums.PaymentStatus
-    paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
-    donorName?: string | null
-    donorEmail?: string | null
-    donorPhone?: string | null
-    isAnonymous?: boolean
-    campaignId?: string | null
-    message?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -17723,6 +17822,23 @@ export namespace Prisma {
     receiveReceipt?: boolean
     isDeleted?: boolean
     deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DonationCreateManyUserInput = {
+    id?: string
+    amount: Decimal | DecimalJsLike | number | string
+    type?: $Enums.DonationType
+    method: $Enums.PaymentMethod
+    status?: $Enums.PaymentStatus
+    paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    donorName?: string | null
+    donorEmail?: string | null
+    donorPhone?: string | null
+    isAnonymous?: boolean
+    campaignId?: string | null
+    message?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -17802,57 +17918,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type DonationUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    amount?: FloatFieldUpdateOperationsInput | number
-    type?: EnumDonationTypeFieldUpdateOperationsInput | $Enums.DonationType
-    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
-    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
-    paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
-    donorName?: NullableStringFieldUpdateOperationsInput | string | null
-    donorEmail?: NullableStringFieldUpdateOperationsInput | string | null
-    donorPhone?: NullableStringFieldUpdateOperationsInput | string | null
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
-    message?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    campaign?: CampaignUpdateOneWithoutDonationsNestedInput
-  }
-
-  export type DonationUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    amount?: FloatFieldUpdateOperationsInput | number
-    type?: EnumDonationTypeFieldUpdateOperationsInput | $Enums.DonationType
-    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
-    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
-    paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
-    donorName?: NullableStringFieldUpdateOperationsInput | string | null
-    donorEmail?: NullableStringFieldUpdateOperationsInput | string | null
-    donorPhone?: NullableStringFieldUpdateOperationsInput | string | null
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
-    campaignId?: NullableStringFieldUpdateOperationsInput | string | null
-    message?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DonationUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    amount?: FloatFieldUpdateOperationsInput | number
-    type?: EnumDonationTypeFieldUpdateOperationsInput | $Enums.DonationType
-    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
-    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
-    paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
-    donorName?: NullableStringFieldUpdateOperationsInput | string | null
-    donorEmail?: NullableStringFieldUpdateOperationsInput | string | null
-    donorPhone?: NullableStringFieldUpdateOperationsInput | string | null
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
-    campaignId?: NullableStringFieldUpdateOperationsInput | string | null
-    message?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type DonorUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -17922,9 +17987,60 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type DonationUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    type?: EnumDonationTypeFieldUpdateOperationsInput | $Enums.DonationType
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    donorName?: NullableStringFieldUpdateOperationsInput | string | null
+    donorEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    donorPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaign?: CampaignUpdateOneWithoutDonationsNestedInput
+  }
+
+  export type DonationUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    type?: EnumDonationTypeFieldUpdateOperationsInput | $Enums.DonationType
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    donorName?: NullableStringFieldUpdateOperationsInput | string | null
+    donorEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    donorPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    campaignId?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DonationUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    type?: EnumDonationTypeFieldUpdateOperationsInput | $Enums.DonationType
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    donorName?: NullableStringFieldUpdateOperationsInput | string | null
+    donorEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    donorPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    campaignId?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type DonationCreateManyCampaignInput = {
     id?: string
-    amount: number
+    amount: Decimal | DecimalJsLike | number | string
     type?: $Enums.DonationType
     method: $Enums.PaymentMethod
     status?: $Enums.PaymentStatus
@@ -17941,7 +18057,7 @@ export namespace Prisma {
 
   export type DonationUpdateWithoutCampaignInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: FloatFieldUpdateOperationsInput | number
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: EnumDonationTypeFieldUpdateOperationsInput | $Enums.DonationType
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
@@ -17958,7 +18074,7 @@ export namespace Prisma {
 
   export type DonationUncheckedUpdateWithoutCampaignInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: FloatFieldUpdateOperationsInput | number
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: EnumDonationTypeFieldUpdateOperationsInput | $Enums.DonationType
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
@@ -17975,7 +18091,7 @@ export namespace Prisma {
 
   export type DonationUncheckedUpdateManyWithoutCampaignInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: FloatFieldUpdateOperationsInput | number
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: EnumDonationTypeFieldUpdateOperationsInput | $Enums.DonationType
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus

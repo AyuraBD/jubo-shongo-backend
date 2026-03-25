@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import status from "http-status"
 import { Prisma } from "../../generated/prisma/client"
 import { TErrorResponse, TErrorSource } from "../interfaces/error.interfaces"
@@ -111,7 +112,7 @@ export const handlePrismaClientKnownRequestError = (error: Prisma.PrismaClientKn
     cleanMessage = cleanMessage.replace(/Invalid `.*?` invocation:?\s*/i, "")
 
 
-    const lines = cleanMessage.split("\n").filter(line => line.trim());
+    const lines = cleanMessage.split("\n").filter((line:any) => line.trim());
     const mainMessage = lines[0] || "An error occurred with the database operation."
 
     const errorSources : TErrorSource[] = [
@@ -141,7 +142,7 @@ export const handlePrismaClientUnknownError = (error: Prisma.PrismaClientUnknown
 
     cleanMessage = cleanMessage.replace(/Invalid `.*?` invocation:?\s*/i, "")
 
-    const lines = cleanMessage.split("\n").filter(line => line.trim());
+    const lines = cleanMessage.split("\n").filter((line:any) => line.trim());
     const mainMessage = lines[0] || "An unknown error occurred with the database operation."
 
     const errorSources : TErrorSource[] = [
@@ -164,14 +165,14 @@ export const handlePrismaClientValidationError = (error: Prisma.PrismaClientVali
 
     cleanMessage = cleanMessage.replace(/Invalid `.*?` invocation:?\s*/i, "")
 
-    const lines = cleanMessage.split("\n").filter(line => line.trim());
+    const lines = cleanMessage.split("\n").filter((line:any) => line.trim());
 
     const errorSources : TErrorSource[] = [];
 
     const fieldMatch = cleanMessage.match(/Argument `(\w+)`/i);
     const fieldName = fieldMatch ? fieldMatch[1] : "Unknown Field";
 
-    const mainMessage = lines.find(line => 
+    const mainMessage = lines.find((line:any) => 
         !line.includes("Argument") &&
         !line.includes("→") &&
         line.length > 10
@@ -197,7 +198,7 @@ export const handlerPrismaClientInitializationError = (error: Prisma.PrismaClien
 
     cleanMessage.replace(/Invalid `.*?` invocation:?\s*/i, "")
 
-    const lines = cleanMessage.split("\n").filter(line => line.trim());
+    const lines = cleanMessage.split("\n").filter((line:any) => line.trim());
 
     const mainMessage = lines[0] || "An error occurred while initializing the Prisma Client."
 

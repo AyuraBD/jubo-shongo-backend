@@ -6,6 +6,7 @@ dotenv.config();
 
 interface EnvConfig {
   PORT:string;
+  NODE_ENV:string;
   DATABASE_URL: string;
   BETTER_AUTH_URL:string;
   BETTER_AUTH_SECRET:string;
@@ -24,11 +25,14 @@ interface EnvConfig {
   REFRESH_TOKEN_EXPIRES_IN: string;
   BETTER_AUTH_SESSION_TOKEN_EXPIRES_IN: string;
   BETTER_AUTH_SESSION_TOKEN_UPDATE_AGE: string;
+  SUPER_ADMIN_EMAIL:string;
+  SUPER_ADMIN_PASSWORD:string;
 }
 
 const loadEnvVariables = ():EnvConfig =>{
   const requiredEnv = [
     'PORT',
+    'NODE_ENV',
     'DATABASE_URL',
     'BETTER_AUTH_URL',
     'BETTER_AUTH_SECRET',
@@ -47,6 +51,8 @@ const loadEnvVariables = ():EnvConfig =>{
     'REFRESH_TOKEN_EXPIRES_IN',
     'BETTER_AUTH_SESSION_TOKEN_EXPIRES_IN',
     'BETTER_AUTH_SESSION_TOKEN_UPDATE_AGE',
+    "SUPER_ADMIN_EMAIL",
+    "SUPER_ADMIN_PASSWORD"
   ]
   requiredEnv.forEach((variable)=>{
     if(!process.env[variable]){
@@ -55,6 +61,7 @@ const loadEnvVariables = ():EnvConfig =>{
   })
   return {
     PORT: process.env.PORT as string,
+    NODE_ENV:process.env.NODE_ENV as string,
     DATABASE_URL: process.env.DATABASE_URL as string,
     BETTER_AUTH_URL: process.env.BETTER_AUTH_URL as string,
     BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET as string,
@@ -73,6 +80,8 @@ const loadEnvVariables = ():EnvConfig =>{
     REFRESH_TOKEN_EXPIRES_IN: process.env.REFRESH_TOKEN_EXPIRES_IN as string,
     BETTER_AUTH_SESSION_TOKEN_EXPIRES_IN: process.env.BETTER_AUTH_SESSION_TOKEN_EXPIRES_IN as string,
     BETTER_AUTH_SESSION_TOKEN_UPDATE_AGE: process.env.BETTER_AUTH_SESSION_TOKEN_UPDATE_AGE as string,
+    SUPER_ADMIN_EMAIL: process.env.SUPER_ADMIN_EMAIL as string,
+    SUPER_ADMIN_PASSWORD: process.env.SUPER_ADMIN_PASSWORD as string
   }
 }
 

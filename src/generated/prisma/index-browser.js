@@ -193,6 +193,7 @@ exports.Prisma.CampaignScalarFieldEnum = {
   goalAmount: 'goalAmount',
   raisedAmount: 'raisedAmount',
   donorCount: 'donorCount',
+  viewCount: 'viewCount',
   coverImage: 'coverImage',
   isUrgent: 'isUrgent',
   isFeatured: 'isFeatured',
