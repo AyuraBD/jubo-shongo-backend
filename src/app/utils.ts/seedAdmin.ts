@@ -10,7 +10,6 @@ export const seedSuperAdmin = async () => {
                 role : Role.SUPER_ADMIN
             }
         })
-
         if(isSuperAdminExist) {
             console.log("Super admin already exists. Skipping seeding super admin.");
             return;

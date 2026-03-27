@@ -23,11 +23,6 @@ const createCampaignZodValidation = z.object({
     .number()
     .positive("Goal amount must be greater than 0"),
 
-  coverImage: z
-    .string()
-    .url("Cover image must be a valid URL")
-    .optional(),
-
   isUrgent: z
     .boolean()
     .optional(),

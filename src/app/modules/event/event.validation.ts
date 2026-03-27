@@ -19,7 +19,6 @@ const createEventZodValidation = z.object({
 
   coverImage: z
     .string()
-    .url("Cover image must be a valid URL")
     .optional(),
 
   location: z
@@ -109,7 +108,7 @@ const updateEventZodValidation = z.object({
     message: "Start date must be before end date",
     path: ["endDate"]
   }
-);
+)
 
 export const EventValidation = {
   createEventZodValidation,

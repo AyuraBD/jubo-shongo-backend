@@ -27,6 +27,9 @@ interface EnvConfig {
   BETTER_AUTH_SESSION_TOKEN_UPDATE_AGE: string;
   SUPER_ADMIN_EMAIL:string;
   SUPER_ADMIN_PASSWORD:string;
+  CLOUDINARY_CLOUD_NAME:string;
+  CLOUDINARY_API_KEY: string;
+  COUDINARY_API_SECRET: string;
 }
 
 const loadEnvVariables = ():EnvConfig =>{
@@ -52,7 +55,10 @@ const loadEnvVariables = ():EnvConfig =>{
     'BETTER_AUTH_SESSION_TOKEN_EXPIRES_IN',
     'BETTER_AUTH_SESSION_TOKEN_UPDATE_AGE',
     "SUPER_ADMIN_EMAIL",
-    "SUPER_ADMIN_PASSWORD"
+    "SUPER_ADMIN_PASSWORD",
+    'CLOUDINARY_CLOUD_NAME',
+    'CLOUDINARY_API_KEY',
+    'COUDINARY_API_SECRET',
   ]
   requiredEnv.forEach((variable)=>{
     if(!process.env[variable]){
@@ -81,7 +87,10 @@ const loadEnvVariables = ():EnvConfig =>{
     BETTER_AUTH_SESSION_TOKEN_EXPIRES_IN: process.env.BETTER_AUTH_SESSION_TOKEN_EXPIRES_IN as string,
     BETTER_AUTH_SESSION_TOKEN_UPDATE_AGE: process.env.BETTER_AUTH_SESSION_TOKEN_UPDATE_AGE as string,
     SUPER_ADMIN_EMAIL: process.env.SUPER_ADMIN_EMAIL as string,
-    SUPER_ADMIN_PASSWORD: process.env.SUPER_ADMIN_PASSWORD as string
+    SUPER_ADMIN_PASSWORD: process.env.SUPER_ADMIN_PASSWORD as string,
+    CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME as string,
+    CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY as string,
+    COUDINARY_API_SECRET: process.env.COUDINARY_API_SECRET as string,
   }
 }
 

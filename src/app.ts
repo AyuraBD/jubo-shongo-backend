@@ -6,8 +6,8 @@ import { auth } from "./app/lib/auth";
 import cors from "cors";
 import { EnvVars } from "./config/env";
 import cookieParser from "cookie-parser";
-import { notFound } from "./app/middleware/NotFound";
 import { globalErrorHandler } from "./app/middleware/globalErrorHandler";
+import { notFound } from "./app/middleware/notFound";
 
 const app : Application = express()
 
@@ -35,6 +35,5 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use(notFound);
 app.use(globalErrorHandler);
-
 
 export default app;

@@ -2,10 +2,17 @@ import { Request, Response } from "express";
 import { catchAsync } from "../../shared/catchAsync";
 import { CampaignServices } from "./campaign.service";
 import { sendResponse } from "../../shared/sendResponse";
+import { prisma } from "../../lib/prisma";
+import AppError from "../../errorHelpers/AppError";
+import { deleteFileFromCloudinary } from "../../../config/cloudinary.config";
+import status from "http-status";
 
 const createCampaign = catchAsync(
   async(req: Request, res: Response)=>{
-    const payload = req.body;
+    const payload = {
+      ...req.body,
+      coverImage: req.file?.path
+    }
     const result = await CampaignServices.createCampaign(payload);
     sendResponse(res, {
       httpStatusCode: 200,
@@ -45,11 +52,27 @@ const getCampaignById = catchAsync(
 
 const updateCampaign = catchAsync(
   async (req: Request, res: Response) => {
-    const { id } = req.params;
-    const payload = req.body;
+    const id = req.params.id as string;
+    const payload = {
+      ...req.body,
+      coverImage: req.file?.path
+    }
 
+    const existingCampaign = await prisma.campaign.findUnique({
+      where: {
+        id
+      }
+    });
+
+    if (!existingCampaign) {
+      throw new AppError(status.NOT_FOUND, "Campaign not found");
+    }
+    if(req?.file){
+      if(existingCampaign.coverImage){
+        await deleteFileFromCloudinary(existingCampaign.coverImage);
+      }
+    }
     const result = await CampaignServices.updateCampaign(id as string, payload);
-
     sendResponse(res, {
       httpStatusCode: 200,
       success: true,
