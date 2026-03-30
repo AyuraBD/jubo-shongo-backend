@@ -4,8 +4,9 @@ model Donation {
   type         DonationType  @default(CAMPAIGN)
   method       PaymentMethod
   status       PaymentStatus @default(PENDING)
-
+  transactionId String?      @db.Uuid() @unique
   paymentGatewayData  Json?
+  stripeEventId String? @unique
 
   userId       String?
   user         User?         @relation(fields: [userId], references: [id])

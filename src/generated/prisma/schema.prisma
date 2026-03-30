@@ -123,13 +123,14 @@ model Campaign {
 }
 
 model Donation {
-  id     String        @id @default(uuid())
-  amount Decimal       @db.Decimal(10, 2)
-  type   DonationType  @default(CAMPAIGN)
-  method PaymentMethod
-  status PaymentStatus @default(PENDING)
-
+  id                 String        @id @default(uuid())
+  amount             Decimal       @db.Decimal(10, 2)
+  type               DonationType  @default(CAMPAIGN)
+  method             PaymentMethod
+  status             PaymentStatus @default(PENDING)
+  transactionId      String?       @unique @db.Uuid()
   paymentGatewayData Json?
+  stripeEventId      String?       @unique
 
   userId String?
   user   User?   @relation(fields: [userId], references: [id])

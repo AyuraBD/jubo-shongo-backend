@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 /**
  * Client
@@ -8836,6 +8835,8 @@ export namespace Prisma {
     type: $Enums.DonationType | null
     method: $Enums.PaymentMethod | null
     status: $Enums.PaymentStatus | null
+    transactionId: string | null
+    stripeEventId: string | null
     userId: string | null
     donorName: string | null
     donorEmail: string | null
@@ -8853,6 +8854,8 @@ export namespace Prisma {
     type: $Enums.DonationType | null
     method: $Enums.PaymentMethod | null
     status: $Enums.PaymentStatus | null
+    transactionId: string | null
+    stripeEventId: string | null
     userId: string | null
     donorName: string | null
     donorEmail: string | null
@@ -8870,7 +8873,9 @@ export namespace Prisma {
     type: number
     method: number
     status: number
+    transactionId: number
     paymentGatewayData: number
+    stripeEventId: number
     userId: number
     donorName: number
     donorEmail: number
@@ -8898,6 +8903,8 @@ export namespace Prisma {
     type?: true
     method?: true
     status?: true
+    transactionId?: true
+    stripeEventId?: true
     userId?: true
     donorName?: true
     donorEmail?: true
@@ -8915,6 +8922,8 @@ export namespace Prisma {
     type?: true
     method?: true
     status?: true
+    transactionId?: true
+    stripeEventId?: true
     userId?: true
     donorName?: true
     donorEmail?: true
@@ -8932,7 +8941,9 @@ export namespace Prisma {
     type?: true
     method?: true
     status?: true
+    transactionId?: true
     paymentGatewayData?: true
+    stripeEventId?: true
     userId?: true
     donorName?: true
     donorEmail?: true
@@ -9037,7 +9048,9 @@ export namespace Prisma {
     type: $Enums.DonationType
     method: $Enums.PaymentMethod
     status: $Enums.PaymentStatus
+    transactionId: string | null
     paymentGatewayData: JsonValue | null
+    stripeEventId: string | null
     userId: string | null
     donorName: string | null
     donorEmail: string | null
@@ -9074,7 +9087,9 @@ export namespace Prisma {
     type?: boolean
     method?: boolean
     status?: boolean
+    transactionId?: boolean
     paymentGatewayData?: boolean
+    stripeEventId?: boolean
     userId?: boolean
     donorName?: boolean
     donorEmail?: boolean
@@ -9094,7 +9109,9 @@ export namespace Prisma {
     type?: boolean
     method?: boolean
     status?: boolean
+    transactionId?: boolean
     paymentGatewayData?: boolean
+    stripeEventId?: boolean
     userId?: boolean
     donorName?: boolean
     donorEmail?: boolean
@@ -9114,7 +9131,9 @@ export namespace Prisma {
     type?: boolean
     method?: boolean
     status?: boolean
+    transactionId?: boolean
     paymentGatewayData?: boolean
+    stripeEventId?: boolean
     userId?: boolean
     donorName?: boolean
     donorEmail?: boolean
@@ -9134,7 +9153,9 @@ export namespace Prisma {
     type?: boolean
     method?: boolean
     status?: boolean
+    transactionId?: boolean
     paymentGatewayData?: boolean
+    stripeEventId?: boolean
     userId?: boolean
     donorName?: boolean
     donorEmail?: boolean
@@ -9146,7 +9167,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type DonationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "amount" | "type" | "method" | "status" | "paymentGatewayData" | "userId" | "donorName" | "donorEmail" | "donorPhone" | "isAnonymous" | "campaignId" | "message" | "createdAt" | "updatedAt", ExtArgs["result"]["donation"]>
+  export type DonationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "amount" | "type" | "method" | "status" | "transactionId" | "paymentGatewayData" | "stripeEventId" | "userId" | "donorName" | "donorEmail" | "donorPhone" | "isAnonymous" | "campaignId" | "message" | "createdAt" | "updatedAt", ExtArgs["result"]["donation"]>
   export type DonationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Donation$userArgs<ExtArgs>
     campaign?: boolean | Donation$campaignArgs<ExtArgs>
@@ -9172,7 +9193,9 @@ export namespace Prisma {
       type: $Enums.DonationType
       method: $Enums.PaymentMethod
       status: $Enums.PaymentStatus
+      transactionId: string | null
       paymentGatewayData: Prisma.JsonValue | null
+      stripeEventId: string | null
       userId: string | null
       donorName: string | null
       donorEmail: string | null
@@ -9612,7 +9635,9 @@ export namespace Prisma {
     readonly type: FieldRef<"Donation", 'DonationType'>
     readonly method: FieldRef<"Donation", 'PaymentMethod'>
     readonly status: FieldRef<"Donation", 'PaymentStatus'>
+    readonly transactionId: FieldRef<"Donation", 'String'>
     readonly paymentGatewayData: FieldRef<"Donation", 'Json'>
+    readonly stripeEventId: FieldRef<"Donation", 'String'>
     readonly userId: FieldRef<"Donation", 'String'>
     readonly donorName: FieldRef<"Donation", 'String'>
     readonly donorEmail: FieldRef<"Donation", 'String'>
@@ -12685,7 +12710,9 @@ export namespace Prisma {
     type: 'type',
     method: 'method',
     status: 'status',
+    transactionId: 'transactionId',
     paymentGatewayData: 'paymentGatewayData',
+    stripeEventId: 'stripeEventId',
     userId: 'userId',
     donorName: 'donorName',
     donorEmail: 'donorEmail',
@@ -13562,7 +13589,9 @@ export namespace Prisma {
     type?: EnumDonationTypeFilter<"Donation"> | $Enums.DonationType
     method?: EnumPaymentMethodFilter<"Donation"> | $Enums.PaymentMethod
     status?: EnumPaymentStatusFilter<"Donation"> | $Enums.PaymentStatus
+    transactionId?: UuidNullableFilter<"Donation"> | string | null
     paymentGatewayData?: JsonNullableFilter<"Donation">
+    stripeEventId?: StringNullableFilter<"Donation"> | string | null
     userId?: StringNullableFilter<"Donation"> | string | null
     donorName?: StringNullableFilter<"Donation"> | string | null
     donorEmail?: StringNullableFilter<"Donation"> | string | null
@@ -13582,7 +13611,9 @@ export namespace Prisma {
     type?: SortOrder
     method?: SortOrder
     status?: SortOrder
+    transactionId?: SortOrderInput | SortOrder
     paymentGatewayData?: SortOrderInput | SortOrder
+    stripeEventId?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
     donorName?: SortOrderInput | SortOrder
     donorEmail?: SortOrderInput | SortOrder
@@ -13598,6 +13629,8 @@ export namespace Prisma {
 
   export type DonationWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    transactionId?: string
+    stripeEventId?: string
     AND?: DonationWhereInput | DonationWhereInput[]
     OR?: DonationWhereInput[]
     NOT?: DonationWhereInput | DonationWhereInput[]
@@ -13617,7 +13650,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Donation"> | Date | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     campaign?: XOR<CampaignNullableScalarRelationFilter, CampaignWhereInput> | null
-  }, "id">
+  }, "id" | "transactionId" | "stripeEventId">
 
   export type DonationOrderByWithAggregationInput = {
     id?: SortOrder
@@ -13625,7 +13658,9 @@ export namespace Prisma {
     type?: SortOrder
     method?: SortOrder
     status?: SortOrder
+    transactionId?: SortOrderInput | SortOrder
     paymentGatewayData?: SortOrderInput | SortOrder
+    stripeEventId?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
     donorName?: SortOrderInput | SortOrder
     donorEmail?: SortOrderInput | SortOrder
@@ -13651,7 +13686,9 @@ export namespace Prisma {
     type?: EnumDonationTypeWithAggregatesFilter<"Donation"> | $Enums.DonationType
     method?: EnumPaymentMethodWithAggregatesFilter<"Donation"> | $Enums.PaymentMethod
     status?: EnumPaymentStatusWithAggregatesFilter<"Donation"> | $Enums.PaymentStatus
+    transactionId?: UuidNullableWithAggregatesFilter<"Donation"> | string | null
     paymentGatewayData?: JsonNullableWithAggregatesFilter<"Donation">
+    stripeEventId?: StringNullableWithAggregatesFilter<"Donation"> | string | null
     userId?: StringNullableWithAggregatesFilter<"Donation"> | string | null
     donorName?: StringNullableWithAggregatesFilter<"Donation"> | string | null
     donorEmail?: StringNullableWithAggregatesFilter<"Donation"> | string | null
@@ -14521,7 +14558,9 @@ export namespace Prisma {
     type?: $Enums.DonationType
     method: $Enums.PaymentMethod
     status?: $Enums.PaymentStatus
+    transactionId?: string | null
     paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    stripeEventId?: string | null
     donorName?: string | null
     donorEmail?: string | null
     donorPhone?: string | null
@@ -14539,7 +14578,9 @@ export namespace Prisma {
     type?: $Enums.DonationType
     method: $Enums.PaymentMethod
     status?: $Enums.PaymentStatus
+    transactionId?: string | null
     paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    stripeEventId?: string | null
     userId?: string | null
     donorName?: string | null
     donorEmail?: string | null
@@ -14557,7 +14598,9 @@ export namespace Prisma {
     type?: EnumDonationTypeFieldUpdateOperationsInput | $Enums.DonationType
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    transactionId?: NullableStringFieldUpdateOperationsInput | string | null
     paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    stripeEventId?: NullableStringFieldUpdateOperationsInput | string | null
     donorName?: NullableStringFieldUpdateOperationsInput | string | null
     donorEmail?: NullableStringFieldUpdateOperationsInput | string | null
     donorPhone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14575,7 +14618,9 @@ export namespace Prisma {
     type?: EnumDonationTypeFieldUpdateOperationsInput | $Enums.DonationType
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    transactionId?: NullableStringFieldUpdateOperationsInput | string | null
     paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    stripeEventId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     donorName?: NullableStringFieldUpdateOperationsInput | string | null
     donorEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14593,7 +14638,9 @@ export namespace Prisma {
     type?: $Enums.DonationType
     method: $Enums.PaymentMethod
     status?: $Enums.PaymentStatus
+    transactionId?: string | null
     paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    stripeEventId?: string | null
     userId?: string | null
     donorName?: string | null
     donorEmail?: string | null
@@ -14611,7 +14658,9 @@ export namespace Prisma {
     type?: EnumDonationTypeFieldUpdateOperationsInput | $Enums.DonationType
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    transactionId?: NullableStringFieldUpdateOperationsInput | string | null
     paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    stripeEventId?: NullableStringFieldUpdateOperationsInput | string | null
     donorName?: NullableStringFieldUpdateOperationsInput | string | null
     donorEmail?: NullableStringFieldUpdateOperationsInput | string | null
     donorPhone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14627,7 +14676,9 @@ export namespace Prisma {
     type?: EnumDonationTypeFieldUpdateOperationsInput | $Enums.DonationType
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    transactionId?: NullableStringFieldUpdateOperationsInput | string | null
     paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    stripeEventId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     donorName?: NullableStringFieldUpdateOperationsInput | string | null
     donorEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -15548,6 +15599,18 @@ export namespace Prisma {
     notIn?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumPaymentStatusFilter<$PrismaModel> | $Enums.PaymentStatus
   }
+
+  export type UuidNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidNullableFilter<$PrismaModel> | string | null
+  }
   export type JsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
@@ -15588,7 +15651,9 @@ export namespace Prisma {
     type?: SortOrder
     method?: SortOrder
     status?: SortOrder
+    transactionId?: SortOrder
     paymentGatewayData?: SortOrder
+    stripeEventId?: SortOrder
     userId?: SortOrder
     donorName?: SortOrder
     donorEmail?: SortOrder
@@ -15610,6 +15675,8 @@ export namespace Prisma {
     type?: SortOrder
     method?: SortOrder
     status?: SortOrder
+    transactionId?: SortOrder
+    stripeEventId?: SortOrder
     userId?: SortOrder
     donorName?: SortOrder
     donorEmail?: SortOrder
@@ -15627,6 +15694,8 @@ export namespace Prisma {
     type?: SortOrder
     method?: SortOrder
     status?: SortOrder
+    transactionId?: SortOrder
+    stripeEventId?: SortOrder
     userId?: SortOrder
     donorName?: SortOrder
     donorEmail?: SortOrder
@@ -15686,6 +15755,21 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumPaymentStatusFilter<$PrismaModel>
     _max?: NestedEnumPaymentStatusFilter<$PrismaModel>
+  }
+
+  export type UuidNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
   export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -16649,6 +16733,17 @@ export namespace Prisma {
     not?: NestedEnumPaymentStatusFilter<$PrismaModel> | $Enums.PaymentStatus
   }
 
+  export type NestedUuidNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
@@ -16693,6 +16788,20 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumPaymentStatusFilter<$PrismaModel>
     _max?: NestedEnumPaymentStatusFilter<$PrismaModel>
+  }
+
+  export type NestedUuidNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
   export type NestedJsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -17030,7 +17139,9 @@ export namespace Prisma {
     type?: $Enums.DonationType
     method: $Enums.PaymentMethod
     status?: $Enums.PaymentStatus
+    transactionId?: string | null
     paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    stripeEventId?: string | null
     donorName?: string | null
     donorEmail?: string | null
     donorPhone?: string | null
@@ -17047,7 +17158,9 @@ export namespace Prisma {
     type?: $Enums.DonationType
     method: $Enums.PaymentMethod
     status?: $Enums.PaymentStatus
+    transactionId?: string | null
     paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    stripeEventId?: string | null
     donorName?: string | null
     donorEmail?: string | null
     donorPhone?: string | null
@@ -17234,7 +17347,9 @@ export namespace Prisma {
     type?: EnumDonationTypeFilter<"Donation"> | $Enums.DonationType
     method?: EnumPaymentMethodFilter<"Donation"> | $Enums.PaymentMethod
     status?: EnumPaymentStatusFilter<"Donation"> | $Enums.PaymentStatus
+    transactionId?: UuidNullableFilter<"Donation"> | string | null
     paymentGatewayData?: JsonNullableFilter<"Donation">
+    stripeEventId?: StringNullableFilter<"Donation"> | string | null
     userId?: StringNullableFilter<"Donation"> | string | null
     donorName?: StringNullableFilter<"Donation"> | string | null
     donorEmail?: StringNullableFilter<"Donation"> | string | null
@@ -17436,7 +17551,9 @@ export namespace Prisma {
     type?: $Enums.DonationType
     method: $Enums.PaymentMethod
     status?: $Enums.PaymentStatus
+    transactionId?: string | null
     paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    stripeEventId?: string | null
     donorName?: string | null
     donorEmail?: string | null
     donorPhone?: string | null
@@ -17453,7 +17570,9 @@ export namespace Prisma {
     type?: $Enums.DonationType
     method: $Enums.PaymentMethod
     status?: $Enums.PaymentStatus
+    transactionId?: string | null
     paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    stripeEventId?: string | null
     userId?: string | null
     donorName?: string | null
     donorEmail?: string | null
@@ -17832,7 +17951,9 @@ export namespace Prisma {
     type?: $Enums.DonationType
     method: $Enums.PaymentMethod
     status?: $Enums.PaymentStatus
+    transactionId?: string | null
     paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    stripeEventId?: string | null
     donorName?: string | null
     donorEmail?: string | null
     donorPhone?: string | null
@@ -17993,7 +18114,9 @@ export namespace Prisma {
     type?: EnumDonationTypeFieldUpdateOperationsInput | $Enums.DonationType
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    transactionId?: NullableStringFieldUpdateOperationsInput | string | null
     paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    stripeEventId?: NullableStringFieldUpdateOperationsInput | string | null
     donorName?: NullableStringFieldUpdateOperationsInput | string | null
     donorEmail?: NullableStringFieldUpdateOperationsInput | string | null
     donorPhone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18010,7 +18133,9 @@ export namespace Prisma {
     type?: EnumDonationTypeFieldUpdateOperationsInput | $Enums.DonationType
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    transactionId?: NullableStringFieldUpdateOperationsInput | string | null
     paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    stripeEventId?: NullableStringFieldUpdateOperationsInput | string | null
     donorName?: NullableStringFieldUpdateOperationsInput | string | null
     donorEmail?: NullableStringFieldUpdateOperationsInput | string | null
     donorPhone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18027,7 +18152,9 @@ export namespace Prisma {
     type?: EnumDonationTypeFieldUpdateOperationsInput | $Enums.DonationType
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    transactionId?: NullableStringFieldUpdateOperationsInput | string | null
     paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    stripeEventId?: NullableStringFieldUpdateOperationsInput | string | null
     donorName?: NullableStringFieldUpdateOperationsInput | string | null
     donorEmail?: NullableStringFieldUpdateOperationsInput | string | null
     donorPhone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18044,7 +18171,9 @@ export namespace Prisma {
     type?: $Enums.DonationType
     method: $Enums.PaymentMethod
     status?: $Enums.PaymentStatus
+    transactionId?: string | null
     paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    stripeEventId?: string | null
     userId?: string | null
     donorName?: string | null
     donorEmail?: string | null
@@ -18061,7 +18190,9 @@ export namespace Prisma {
     type?: EnumDonationTypeFieldUpdateOperationsInput | $Enums.DonationType
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    transactionId?: NullableStringFieldUpdateOperationsInput | string | null
     paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    stripeEventId?: NullableStringFieldUpdateOperationsInput | string | null
     donorName?: NullableStringFieldUpdateOperationsInput | string | null
     donorEmail?: NullableStringFieldUpdateOperationsInput | string | null
     donorPhone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18078,7 +18209,9 @@ export namespace Prisma {
     type?: EnumDonationTypeFieldUpdateOperationsInput | $Enums.DonationType
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    transactionId?: NullableStringFieldUpdateOperationsInput | string | null
     paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    stripeEventId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     donorName?: NullableStringFieldUpdateOperationsInput | string | null
     donorEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18095,7 +18228,9 @@ export namespace Prisma {
     type?: EnumDonationTypeFieldUpdateOperationsInput | $Enums.DonationType
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    transactionId?: NullableStringFieldUpdateOperationsInput | string | null
     paymentGatewayData?: NullableJsonNullValueInput | InputJsonValue
+    stripeEventId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     donorName?: NullableStringFieldUpdateOperationsInput | string | null
     donorEmail?: NullableStringFieldUpdateOperationsInput | string | null

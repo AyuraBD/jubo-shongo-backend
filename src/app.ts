@@ -33,6 +33,11 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Hello, TypeScript + Express!');
 });
 
+app.post('/webhook', express.raw({type: "application/json"}), async(req: Request, res: Response)=>{
+  console.log("Webhook ", req.body);
+  res.status(200).json({received: true});
+})
+
 app.use(notFound);
 app.use(globalErrorHandler);
 
